@@ -4,12 +4,12 @@ This repository contains our group's solution to the Topic 4 micro-project for t
 
 ## Team Members
 
-Metin Simsek
-Zheyu Yin
-Kirill Radiushin
-Diego Martins da Silva
-Farhan Mansoor
-Sonia Woks Keuleu
+- [Metin Simsek](https://smsk.dev)
+- Zheyu Yin
+- Kirill Radiushin
+- Diego Martins da Silva
+- Farhan Mansoor
+- Sonia Woks Keuleu
 
 ## Quick Start
 
