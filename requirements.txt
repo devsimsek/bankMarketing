@@ -1,0 +1,9 @@
+pandas==3.0
+numpy
+matplotlib
+seaborn
+scikit-learn==1.8
+imbalanced-learn
+xgboost==3.2
+shap==0.51
+jinja2
