@@ -103,15 +103,19 @@
             body.low-power canvas.ascii-bg {
                 display: none !important;
             }
-            #deck {
+            #stage {
                 position: fixed;
                 inset: 0;
+                z-index: 10;
+                overflow: hidden;
+            }
+            #deck {
+                position: relative;
                 width: 10000vw;
                 height: 100vh;
                 display: flex;
                 flex-wrap: nowrap;
                 transition: transform 0.9s cubic-bezier(0.77, 0, 0.175, 1);
-                z-index: 10;
                 will-change: transform;
             }
             .slide {
@@ -1627,6 +1631,10 @@
   #presenter-panel .pnl-next-block{margin-top:24px;padding:16px;background:rgba(255,255,255,.04);border-radius:6px}
   #presenter-panel .pnl-next-label{font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:#555;margin-bottom:6px}
   #presenter-panel .pnl-next-title{font-size:14px;color:#999}
+  #presenter-panel .pnl-nav-bar{display:flex;gap:10px;margin-top:22px}
+  #presenter-panel .pnl-nav-btn{flex:1;padding:10px 16px;border:1px solid rgba(255,255,255,.15);border-radius:6px;background:rgba(255,255,255,.04);color:#bbb;font-size:14px;cursor:pointer;text-align:center;font-family:inherit;user-select:none}
+  #presenter-panel .pnl-nav-btn:hover{background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.25)}
+  #presenter-panel .pnl-nav-btn:active{background:rgba(255,255,255,.18)}
   #presenter-panel .pnl-hint{position:absolute;bottom:18px;right:24px;font-family:"JetBrains Mono",monospace;font-size:10px;color:#444;letter-spacing:.06em}
   #presenter-panel .pnl-close-btn{position:absolute;top:16px;right:20px;background:none;border:1px solid rgba(255,255,255,.15);color:#888;font-size:18px;width:32px;height:32px;border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center}
   #presenter-panel .pnl-close-btn:hover{background:rgba(255,255,255,.08);color:#FFF}
@@ -1691,6 +1699,7 @@
 
         <canvas id="bg-grid" class="bg"></canvas>
 
+        <div id="stage">
         <div id="deck">
             <!-- ====== SLIDE 01 - COVER - IKB + ASCII ====== -->
             <section class="slide accent" data-layout="S01" data-animate="hero" data-notes="Good morning everyone. Today we present our project: Predictive Modeling for Bank Term Deposit. I'm [Name], and together with my teammates [Name] and [Name], we'll walk you through how we built a machine learning system to help a Portuguese bank target the right customers for term deposit campaigns.">
@@ -5571,6 +5580,7 @@ full_num_cols = production_num_cols + ['duration']</pre>
                 </div>
             </section>
         </div>
+        </div>
 
         <div id="nav"></div>
 
@@ -5731,11 +5741,31 @@ void main(){
             const deck = document.getElementById("deck");
             const slides = deck.querySelectorAll(".slide");
             const nav = document.getElementById("nav");
+            const stage = document.getElementById("stage");
             let idx = 0,
                 total = slides.length,
                 lock = false;
 
             deck.style.width = total * 100 + "vw";
+
+            /* ── Responsive 16:9 letterboxing ── */
+            function updateStage() {
+                const vw = window.innerWidth;
+                const vh = window.innerHeight;
+                const ratio = 16 / 9;
+                let scale = 1, offsetX = 0, offsetY = 0;
+                if (vw / vh > ratio) {
+                    scale = vh / (vw * 9 / 16);
+                    offsetX = (vw - vw * scale) / 2;
+                } else if (vw / vh < ratio) {
+                    scale = vw / (vh * 16 / 9);
+                    offsetY = (vh - vh * scale) / 2;
+                }
+                stage.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
+                stage.style.transformOrigin = '0 0';
+            }
+            updateStage();
+            window.addEventListener('resize', updateStage);
 
             slides.forEach((s, i) => {
                 const b = document.createElement("button");
@@ -5765,6 +5795,7 @@ void main(){
                 lock = true;
                 setTimeout(() => (lock = false), 700);
             }
+            window.__goSlide = go;
 
             /* =============== ESC 索引视图 =============== */
             let overviewOn = false;
@@ -6524,6 +6555,10 @@ void main(){
       <div class="pnl-next-label">Next Slide</div>
       <div class="pnl-next-title" id="pnl-next-title"></div>
     </div>
+    <div class="pnl-nav-bar">
+      <button class="pnl-nav-btn" id="pnl-btn-prev">← Previous</button>
+      <button class="pnl-nav-btn" id="pnl-btn-next">Next →</button>
+    </div>
     <div class="pnl-hint">Bank Marketing &middot; Speaker Notes</div>
   </div>
 </div>
@@ -6535,8 +6570,17 @@ void main(){
   var channel = null;
   var startTime = Date.now();
 
-  // BroadcastChannel for popup sync
+  // BroadcastChannel for popup sync + bidirectional control
   try { channel = new BroadcastChannel('bank-marketing-presenter'); } catch(e) {}
+  if (channel) {
+    channel.onmessage = function(ev) {
+      if (ev.data && ev.data.type === 'navigate') {
+        var cur = window.__currentSlideIndex || 0;
+        if (ev.data.direction === 'prev' && window.__goSlide) window.__goSlide(cur - 1);
+        else if (ev.data.direction === 'next' && window.__goSlide) window.__goSlide(cur + 1);
+      }
+    };
+  }
 
   function getSlideInfo() {
     var sections = document.querySelectorAll('section.slide');
@@ -6635,6 +6679,11 @@ void main(){
       '.next-title{font-size:26px;color:#999}' +
       '.hint{position:fixed;bottom:18px;right:22px;font-size:16px;color:#444;font-family:monospace}' +
       '.dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#4CAF50;margin-right:6px}' +
+      '.nav-bar{display:flex;gap:14px;margin-top:28px}' +
+      '.nav-btn{flex:1;padding:16px 20px;border:1px solid rgba(255,255,255,.18);border-radius:8px;background:rgba(255,255,255,.04);color:#bbb;font-size:18px;cursor:pointer;text-align:center;font-family:system-ui,sans-serif;user-select:none}' +
+      '.nav-btn:hover{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.3)}' +
+      '.nav-btn:active{background:rgba(255,255,255,.2)}' +
+      '.kbd-hint{font-size:12px;color:#555;margin-top:8px;text-align:center;font-family:monospace}' +
       '</style></head><body>' +
       '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">' +
       '<div class="badge"><span class="dot"></span>SPEAKER NOTES</div>' +
@@ -6644,7 +6693,12 @@ void main(){
       '<div class="txt" id="notes"></div>' +
       '<div class="timer-row"><div class="timer" id="timer">00:00</div><div class="badge" style="color:#666">N to refocus</div></div>' +
       '<div class="next-block"><div class="next-label">Next Slide</div><div class="next-title" id="nextTitle"></div></div>' +
-      '<div class="hint">Bank Marketing · Speaker Notes · Close to exit</div>' +
+      '<div class="nav-bar">' +
+      '<button class="nav-btn" id="btn-prev">← Previous</button>' +
+      '<button class="nav-btn" id="btn-next">Next →</button>' +
+      '</div>' +
+      '<div class="kbd-hint">← → arrow keys · Close window to exit</div>' +
+      '<div class="hint">Bank Marketing · Speaker Notes</div>' +
       '</body></html>'
     );
 
@@ -6662,10 +6716,21 @@ void main(){
           document.getElementById('notes').textContent = d.notes || '(No speaker notes for this slide)';
           if (!d.notes) document.getElementById('notes').className = 'txt empty';
           else document.getElementById('notes').className = 'txt';
-          document.getElementById('nextTitle').textContent = d.nextTitle || '— End —';
+          document.getElementById('nextTitle').textContent = d.nextTitle || '\\u2014 End \\u2014';
           document.getElementById('timer').textContent = ft();
         }
       };
+      // Navigation buttons → control main window
+      document.getElementById('btn-prev').onclick = function() { ch2.postMessage({type:'navigate',direction:'prev'}); };
+      document.getElementById('btn-next').onclick = function() { ch2.postMessage({type:'navigate',direction:'next'}); };
+      // Keyboard arrow keys → control main window
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+          e.preventDefault(); ch2.postMessage({type:'navigate',direction:'prev'});
+        } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
+          e.preventDefault(); ch2.postMessage({type:'navigate',direction:'next'});
+        }
+      });
       setInterval(function() { document.getElementById('timer').textContent = ft(); }, 1000);
     }.toString() + ')();';
     notesWin.document.body.appendChild(s);
@@ -6717,6 +6782,16 @@ void main(){
   document.getElementById('presenter-backdrop').addEventListener('click', function() {
     panelActive = false;
     document.getElementById('presenter-overlay').classList.remove('active');
+  });
+
+  // Panel nav buttons → control slides
+  document.getElementById('pnl-btn-prev').addEventListener('click', function() {
+    var cur = window.__currentSlideIndex || 0;
+    if (window.__goSlide) window.__goSlide(cur - 1);
+  });
+  document.getElementById('pnl-btn-next').addEventListener('click', function() {
+    var cur = window.__currentSlideIndex || 0;
+    if (window.__goSlide) window.__goSlide(cur + 1);
   });
 
   // Poll slide changes
