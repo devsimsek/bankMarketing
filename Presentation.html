@@ -1,11 +1,10 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="zh-CN">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>
-            Bank Marketing Campaign - Predictive Modeling for Term Deposit
-            Subscriptions
+            Predictive Modeling for Bank Term Deposit — Data Analytics Micro Project
         </title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -999,7 +998,7 @@
             }
             .card-ink .t-meta,
             .card-ink .t-cat {
-                color: rgba(255, 255, 255, 0.6);
+                color: var(--text-secondary);
             }
             .card-accent {
                 background: var(--accent);
@@ -1110,7 +1109,7 @@
                 z-index: 1;
             }
             .slide.accent .canvas-card .chrome-min {
-                color: rgba(255, 255, 255, 0.62);
+                color: var(--text-secondary);
             }
             .num-mega {
                 font-family: var(--sans);
@@ -1348,7 +1347,7 @@
             }
             .bar-towers {
                 display: grid;
-                grid-template-columns: repeat(4, 1fr);
+                grid-template-columns: repeat(4, minmax(0, 1fr));
                 gap: 1.2vw;
                 flex: 1;
                 align-items: end;
@@ -1360,9 +1359,12 @@
                 justify-content: flex-end;
                 min-height: 0;
                 height: 100%;
+                width: 100%;
             }
             .bar-tower .body-block {
                 flex: 0 1 auto;
+                width: 100%;
+                max-width: 100%;
                 padding: 2vh 1.2vw 2vh;
                 display: flex;
                 flex-direction: column;
@@ -1371,6 +1373,7 @@
                 background: var(--paper);
                 color: var(--ink);
                 border: 1px solid var(--grey-2);
+                box-sizing: border-box;
             }
             .bar-tower .body-block.b-accent {
                 background: var(--accent);
@@ -1472,7 +1475,7 @@
             }
             .slide.dark .canvas-card .chrome-min,
             .split-half .half.b-ink .canvas-card .chrome-min {
-                color: rgba(255, 255, 255, 0.62);
+                color: var(--text-secondary);
             }
             .t-cat {
                 font-family: var(--mono);
@@ -1508,7 +1511,7 @@
             }
             .t-body-sm {
                 font-family: var(--sans), var(--sans-zh);
-                font-size: 16px;
+                font-size: 18px;
                 font-weight: 400;
                 color: var(--text-secondary);
                 line-height: 1.55;
@@ -1541,7 +1544,7 @@
             .slide.dark .t-cat,
             .slide.dark .t-meta,
             .slide.dark .t-helper {
-                color: rgba(255, 255, 255, 0.62);
+                color: var(--text-secondary);
             }
             .slide.dark .t-body-sm {
                 color: rgba(255, 255, 255, 0.78);
@@ -1554,7 +1557,7 @@
             .split-half .half.b-ink .t-cat,
             .split-half .half.b-ink .t-meta,
             .split-half .half.b-ink .t-helper {
-                color: rgba(255, 255, 255, 0.62);
+                color: var(--text-secondary);
             }
             .split-half .half.b-ink .t-body-sm {
                 color: rgba(255, 255, 255, 0.78);
@@ -1608,7 +1611,27 @@
                 }
             }
         </style>
-    </head>
+    
+<style id="presenter-panel-style">
+  #presenter-overlay{display:none;position:fixed;inset:0;z-index:9999;pointer-events:none}
+  #presenter-overlay.active{display:block;pointer-events:auto}
+  #presenter-backdrop{position:absolute;inset:0;background:rgba(0,0,0,0.45)}
+  #presenter-panel{position:absolute;top:0;right:0;bottom:0;width:min(460px,42vw);background:#1A1A1A;color:#E0E0E0;padding:32px 28px;overflow-y:auto;font-family:system-ui,-apple-system,"PingFang SC",sans-serif;box-shadow:-8px 0 40px rgba(0,0,0,0.5)}
+  #presenter-panel .pnl-badge{font-family:"JetBrains Mono","SF Mono",monospace;font-size:10px;letter-spacing:.12em;color:#888;text-transform:uppercase;margin-bottom:6px}
+  #presenter-panel .pnl-label{font-size:20px;font-weight:600;color:#FFF;line-height:1.3;margin-bottom:4px}
+  #presenter-panel .pnl-divider{height:1px;background:rgba(255,255,255,.14);margin:18px 0}
+  #presenter-panel .pnl-notes{font-size:15px;line-height:1.75;color:#CCC;white-space:pre-wrap}
+  #presenter-panel .pnl-notes.empty{color:#555;font-style:italic}
+  #presenter-panel .pnl-timer-row{margin-top:22px;padding-top:14px;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;align-items:center}
+  #presenter-panel .pnl-timer{font-family:"JetBrains Mono","SF Mono",monospace;font-size:22px;color:#AAA}
+  #presenter-panel .pnl-next-block{margin-top:24px;padding:16px;background:rgba(255,255,255,.04);border-radius:6px}
+  #presenter-panel .pnl-next-label{font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:#555;margin-bottom:6px}
+  #presenter-panel .pnl-next-title{font-size:14px;color:#999}
+  #presenter-panel .pnl-hint{position:absolute;bottom:18px;right:24px;font-family:"JetBrains Mono",monospace;font-size:10px;color:#444;letter-spacing:.06em}
+  #presenter-panel .pnl-close-btn{position:absolute;top:16px;right:20px;background:none;border:1px solid rgba(255,255,255,.15);color:#888;font-size:18px;width:32px;height:32px;border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  #presenter-panel .pnl-close-btn:hover{background:rgba(255,255,255,.08);color:#FFF}
+</style>
+</head>
     <body class="canvas-mode">
         <script>
             if (
@@ -1670,34 +1693,24 @@
 
         <div id="deck">
             <!-- ====== SLIDE 01 - COVER - IKB + ASCII ====== -->
-            <section class="slide accent" data-layout="S01" data-animate="hero">
+            <section class="slide accent" data-layout="S01" data-animate="hero" data-notes="Good morning everyone. Today we present our project: Predictive Modeling for Bank Term Deposit. I'm [Name], and together with my teammates [Name] and [Name], we'll walk you through how we built a machine learning system to help a Portuguese bank target the right customers for term deposit campaigns.">
                 <div class="canvas-card">
                     <canvas class="ascii-bg" aria-hidden="true"></canvas>
-                    <div class="chrome-min">
+                    <div class="chrome-min" style="color:rgba(255,255,255,0.78)">
                         <div class="l">
                             Bank Marketing - Data Analytics Micro Project
                         </div>
-                        <div class="r">IKB - 01 / 13</div>
+                        <div class="r">01 / 23</div>
                     </div>
                     <div
                         style="
                             flex: 1;
                             padding: 0;
                             display: grid;
-                            grid-template-rows: auto 1fr auto;
+                            grid-template-rows: 1fr auto;
                             gap: 2.6vh;
                         "
                     >
-                        <div
-                            data-anim="kicker"
-                            class="t-meta"
-                            style="
-                                color: rgba(255, 255, 255, 0.78);
-                                letter-spacing: 0.22em;
-                            "
-                        >
-                            TOPIC 4 - CLASSIFICATION - TERM DEPOSIT PREDICTION
-                        </div>
                         <h1
                             data-anim="title"
                             style="
@@ -1710,11 +1723,11 @@
                                 color: #fff;
                             "
                         >
-                            Bank<br />Marketing<br /><span
+                            Predictive<br />Modeling<br /><span
                                 style="font-style: italic; font-weight: 300"
-                                >Campaign</span
+                                >for Bank</span
                             >
-                            Prediction
+                            Term Deposit
                         </h1>
                         <div
                             data-anim="bottom"
@@ -1727,20 +1740,6 @@
                             "
                         >
                             <div
-                                data-anim="lead"
-                                class="lead"
-                                style="
-                                    max-width: 52ch;
-                                    color: rgba(255, 255, 255, 0.86);
-                                    font-weight: 300;
-                                "
-                            >
-                                Enriched dataset (41,188 records × 21 features)
-                                with 5 Portuguese economic indicators —
-                                predicting term deposit subscriptions for
-                                cost-effective marketing.
-                            </div>
-                            <div
                                 style="
                                     display: flex;
                                     justify-content: space-between;
@@ -1749,14 +1748,14 @@
                             >
                                 <div
                                     class="t-meta"
-                                    style="color: rgba(255, 255, 255, 0.6)"
+                                    style="color: rgba(255,255,255,0.78)"
                                 >
                                     Data Analytics - Prof. Dr. Wolfgang Kratsch
                                     - 2026
                                 </div>
                                 <div
                                     class="t-meta"
-                                    style="color: rgba(255, 255, 255, 0.6)"
+                                    style="color: rgba(255,255,255,0.78)"
                                 >
                                     → arrow keys / swipe
                                 </div>
@@ -1771,11 +1770,11 @@
                 class="slide light"
                 data-layout="S02"
                 data-animate="grid-reveal"
-            >
+             data-notes="Here is our team of seven. I'll cover the introduction and data exploration. [Speaker 2] will explain our feature engineering and modeling approach. [Speaker 3] will present the evaluation results and business recommendations.">
                 <div class="canvas-card">
                     <div class="chrome-min">
                         <div class="l">TEAM MEMBERS</div>
-                        <div class="r">02 / 13</div>
+                        <div class="r">02 / 23</div>
                     </div>
                     <div
                         style="
@@ -1784,7 +1783,8 @@
                             display: flex;
                             flex-direction: column;
                             gap: 3vh;
-                            justify-content: center;
+                            justify-content: flex-start;
+                            padding-top: 10vh;
                         "
                     >
                         <div
@@ -1816,18 +1816,18 @@
                             data-anim="content"
                             style="
                                 display: grid;
-                                grid-template-columns: repeat(3, 1fr);
-                                gap: 1.6vw;
+                                grid-template-columns: repeat(4, 1fr);
+                                gap: 1.4vw;
                                 margin-top: 2vh;
                             "
                         >
                             <div
                                 class="card-fill"
                                 style="
-                                    padding: 2.4vh 1.6vw;
+                                    padding: 2vh 1.2vw;
                                     display: flex;
                                     flex-direction: column;
-                                    gap: 1vh;
+                                    gap: 0.8vh;
                                     border-top: 3px solid var(--accent);
                                     text-align: center;
                                 "
@@ -1836,7 +1836,7 @@
                                     style="
                                         font-family: var(--sans);
                                         font-weight: 200;
-                                        font-size: min(2.8vw, 5vh);
+                                        font-size: min(2.2vw, 4vh);
                                         line-height: 1.1;
                                         letter-spacing: -0.02em;
                                     "
@@ -1847,10 +1847,10 @@
                             <div
                                 class="card-fill"
                                 style="
-                                    padding: 2.4vh 1.6vw;
+                                    padding: 2vh 1.2vw;
                                     display: flex;
                                     flex-direction: column;
-                                    gap: 1vh;
+                                    gap: 0.8vh;
                                     border-top: 3px solid var(--accent);
                                     text-align: center;
                                 "
@@ -1859,7 +1859,7 @@
                                     style="
                                         font-family: var(--sans);
                                         font-weight: 200;
-                                        font-size: min(2.8vw, 5vh);
+                                        font-size: min(2.2vw, 4vh);
                                         line-height: 1.1;
                                         letter-spacing: -0.02em;
                                     "
@@ -1870,10 +1870,10 @@
                             <div
                                 class="card-fill"
                                 style="
-                                    padding: 2.4vh 1.6vw;
+                                    padding: 2vh 1.2vw;
                                     display: flex;
                                     flex-direction: column;
-                                    gap: 1vh;
+                                    gap: 0.8vh;
                                     border-top: 3px solid var(--accent);
                                     text-align: center;
                                 "
@@ -1882,7 +1882,7 @@
                                     style="
                                         font-family: var(--sans);
                                         font-weight: 200;
-                                        font-size: min(2.8vw, 5vh);
+                                        font-size: min(2.2vw, 4vh);
                                         line-height: 1.1;
                                         letter-spacing: -0.02em;
                                     "
@@ -1893,10 +1893,10 @@
                             <div
                                 class="card-fill"
                                 style="
-                                    padding: 2.4vh 1.6vw;
+                                    padding: 2vh 1.2vw;
                                     display: flex;
                                     flex-direction: column;
-                                    gap: 1vh;
+                                    gap: 0.8vh;
                                     border-top: 3px solid var(--accent);
                                     text-align: center;
                                 "
@@ -1905,7 +1905,7 @@
                                     style="
                                         font-family: var(--sans);
                                         font-weight: 200;
-                                        font-size: min(2.8vw, 5vh);
+                                        font-size: min(2.2vw, 4vh);
                                         line-height: 1.1;
                                         letter-spacing: -0.02em;
                                     "
@@ -1916,10 +1916,10 @@
                             <div
                                 class="card-fill"
                                 style="
-                                    padding: 2.4vh 1.6vw;
+                                    padding: 2vh 1.2vw;
                                     display: flex;
                                     flex-direction: column;
-                                    gap: 1vh;
+                                    gap: 0.8vh;
                                     border-top: 3px solid var(--accent);
                                     text-align: center;
                                 "
@@ -1928,7 +1928,7 @@
                                     style="
                                         font-family: var(--sans);
                                         font-weight: 200;
-                                        font-size: min(2.8vw, 5vh);
+                                        font-size: min(2.2vw, 4vh);
                                         line-height: 1.1;
                                         letter-spacing: -0.02em;
                                     "
@@ -1939,10 +1939,10 @@
                             <div
                                 class="card-fill"
                                 style="
-                                    padding: 2.4vh 1.6vw;
+                                    padding: 2vh 1.2vw;
                                     display: flex;
                                     flex-direction: column;
-                                    gap: 1vh;
+                                    gap: 0.8vh;
                                     border-top: 3px solid var(--accent);
                                     text-align: center;
                                 "
@@ -1951,7 +1951,7 @@
                                     style="
                                         font-family: var(--sans);
                                         font-weight: 200;
-                                        font-size: min(2.8vw, 5vh);
+                                        font-size: min(2.2vw, 4vh);
                                         line-height: 1.1;
                                         letter-spacing: -0.02em;
                                     "
@@ -1959,13 +1959,29 @@
                                     Sonia Woks Keuleu
                                 </div>
                             </div>
-                        </div>
-                        <div
-                            data-anim="foot"
-                            class="t-meta"
-                            style="text-align: center; margin-top: 2vh"
-                        >
-                            Data Analytics - Prof. Dr. Wolfgang Kratsch - 2026
+                            <div
+                                class="card-fill"
+                                style="
+                                    padding: 2vh 1.2vw;
+                                    display: flex;
+                                    flex-direction: column;
+                                    gap: 0.8vh;
+                                    border-top: 3px solid var(--accent);
+                                    text-align: center;
+                                "
+                            >
+                                <div
+                                    style="
+                                        font-family: var(--sans);
+                                        font-weight: 200;
+                                        font-size: min(2.2vw, 4vh);
+                                        line-height: 1.1;
+                                        letter-spacing: -0.02em;
+                                    "
+                                >
+                                    Boonyawee Thititham
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1976,11 +1992,11 @@
                 class="slide light"
                 data-layout="S02"
                 data-animate="grid-reveal"
-            >
+             data-notes="Let me start with the problem. A Portuguese bank runs telemarketing campaigns to sell term deposits. The problem: most calls end in rejection. If we can predict which customers are likely to subscribe, the bank can focus its resources on the right people — reducing cost and improving conversion. Our dataset has 41,188 contacts with 21 features — demographic data like age and job, financial data like housing and personal loans, campaign data like contact method and number of attempts, and — importantly — 5 macroeconomic indicators from Banco de Portugal covering the 2008–2010 financial crisis period. The target variable is binary: did the customer subscribe to a term deposit? Here's the catch — only 11.3% did. That severe class imbalance shapes every decision we made.">
                 <div class="canvas-card">
                     <div class="chrome-min">
                         <div class="l">PROJECT OVERVIEW</div>
-                        <div class="r">03 / 13</div>
+                        <div class="r">03 / 23</div>
                     </div>
                     <div
                         style="
@@ -2023,20 +2039,21 @@
                             data-anim="cards"
                             style="
                                 display: grid;
-                                grid-template-columns: repeat(4, 1fr);
-                                gap: 1.6vw;
+                                grid-template-columns: 1fr 1fr;
+                                grid-template-rows: 1fr 1fr;
+                                gap: var(--sp-6);
                                 flex: 1;
-                                align-content: start;
                             "
                         >
                             <div
                                 class="card-fill"
                                 style="
-                                    padding: 2.4vh 1.6vw;
+                                    padding: 3vh 2vw;
                                     display: flex;
                                     flex-direction: column;
-                                    gap: 1.2vh;
+                                    gap: 1.5vh;
                                     border-top: 3px solid var(--accent);
+                                    justify-content: center;
                                 "
                             >
                                 <div class="t-meta">RECORDS</div>
@@ -2044,14 +2061,14 @@
                                     style="
                                         font-family: var(--sans);
                                         font-weight: 200;
-                                        font-size: min(4vw, 7vh);
+                                        font-size: min(5.5vw, 9vh);
                                         line-height: 1;
                                         letter-spacing: -0.03em;
                                     "
                                 >
                                     41,188
                                 </div>
-                                <div class="t-body-sm">
+                                <div class="t-body-sm" style="font-size:max(18px,1.1vw);line-height:1.5">
                                     Portuguese bank telemarketing contacts, May
                                     2008 – Nov 2010, chronologically ordered.
                                 </div>
@@ -2059,11 +2076,12 @@
                             <div
                                 class="card-fill"
                                 style="
-                                    padding: 2.4vh 1.6vw;
+                                    padding: 3vh 2vw;
                                     display: flex;
                                     flex-direction: column;
-                                    gap: 1.2vh;
+                                    gap: 1.5vh;
                                     border-top: 3px solid var(--accent);
+                                    justify-content: center;
                                 "
                             >
                                 <div class="t-meta">FEATURES</div>
@@ -2071,14 +2089,14 @@
                                     style="
                                         font-family: var(--sans);
                                         font-weight: 200;
-                                        font-size: min(4vw, 7vh);
+                                        font-size: min(5.5vw, 9vh);
                                         line-height: 1;
                                         letter-spacing: -0.03em;
                                     "
                                 >
                                     21
                                 </div>
-                                <div class="t-body-sm">
+                                <div class="t-body-sm" style="font-size:max(18px,1.1vw);line-height:1.5">
                                     Demographic + financial + campaign +
                                     <strong>5 economic indicators</strong> from
                                     Banco de Portugal.
@@ -2087,11 +2105,12 @@
                             <div
                                 class="card-fill"
                                 style="
-                                    padding: 2.4vh 1.6vw;
+                                    padding: 3vh 2vw;
                                     display: flex;
                                     flex-direction: column;
-                                    gap: 1.2vh;
+                                    gap: 1.5vh;
                                     border-top: 3px solid var(--accent);
+                                    justify-content: center;
                                 "
                             >
                                 <div class="t-meta">TARGET</div>
@@ -2099,14 +2118,14 @@
                                     style="
                                         font-family: var(--sans);
                                         font-weight: 200;
-                                        font-size: min(4vw, 7vh);
+                                        font-size: min(5.5vw, 9vh);
                                         line-height: 1;
                                         letter-spacing: -0.03em;
                                     "
                                 >
                                     Binary
                                 </div>
-                                <div class="t-body-sm">
+                                <div class="t-body-sm" style="font-size:max(18px,1.1vw);line-height:1.5">
                                     Term deposit subscription (yes / no). Severe
                                     class imbalance — only 11.3% positive.
                                 </div>
@@ -2114,11 +2133,12 @@
                             <div
                                 class="card-fill"
                                 style="
-                                    padding: 2.4vh 1.6vw;
+                                    padding: 3vh 2vw;
                                     display: flex;
                                     flex-direction: column;
-                                    gap: 1.2vh;
+                                    gap: 1.5vh;
                                     border-top: 3px solid var(--accent);
+                                    justify-content: center;
                                 "
                             >
                                 <div class="t-meta">ECONOMIC CONTEXT</div>
@@ -2126,14 +2146,14 @@
                                     style="
                                         font-family: var(--sans);
                                         font-weight: 200;
-                                        font-size: min(4vw, 7vh);
+                                        font-size: min(5.5vw, 9vh);
                                         line-height: 1;
                                         letter-spacing: -0.03em;
                                     "
                                 >
                                     5
                                 </div>
-                                <div class="t-body-sm">
+                                <div class="t-body-sm" style="font-size:max(18px,1.1vw);line-height:1.5">
                                     Euribor 3m, employment rate, CPI, consumer
                                     confidence, nr. employed — financial crisis
                                     recovery period.
@@ -2144,24 +2164,24 @@
                 </div>
             </section>
 
-            <!-- ====== SLIDE 03 - EDA KEY FINDINGS ====== -->
+            <!-- ====== SLIDE 04 - EDA KEY FINDINGS ====== -->
             <section
-                class="slide dark"
+                class="slide light"
                 data-layout="S03"
                 data-animate="measure-up"
-            >
+             data-notes="Here are our four key findings from exploratory data analysis — we call this our bar tower visualization. First, class imbalance: 88.7% of customers said no. That means if you always predict 'no', you get 88.7% accuracy. Accuracy is completely deceptive here — we cannot use it as our primary metric. Second, duration leakage: this is the biggest trap in the dataset. Customers who subscribe stay on the phone 3 to 5 times longer. But you only know call duration AFTER the call ends — including it means predicting the past. We'll come back to this. Third, economic signal: Euribor 3m — the interbank interest rate — correlates negatively with subscriptions. When rates fell during the crisis, subscription patterns shifted. Fourth, prior campaign outcome is the strongest categorical predictor — previous success strongly predicts future success.">
                 <div class="canvas-card">
                     <div class="chrome-min">
                         <div class="l">DATA UNDERSTANDING</div>
-                        <div class="r">04 / 13</div>
+                        <div class="r">04 / 23</div>
                     </div>
                     <div
                         style="
                             flex: 1;
                             padding: 0;
-                            display: flex;
-                            flex-direction: column;
-                            gap: 3vh;
+                            display: grid;
+                            grid-template-rows: auto 1fr;
+                            gap: 1.4vh;
                         "
                     >
                         <div
@@ -2169,12 +2189,12 @@
                             style="
                                 display: flex;
                                 flex-direction: column;
-                                gap: 1.4vh;
+                                gap: 0.8vh;
                             "
                         >
                             <div
                                 class="t-meta"
-                                style="color: rgba(255, 255, 255, 0.62)"
+                                style="color: var(--text-secondary)"
                             >
                                 EXPLORATORY DATA ANALYSIS
                             </div>
@@ -2182,10 +2202,9 @@
                                 style="
                                     font-family: var(--sans), var(--sans-zh);
                                     font-weight: 200;
-                                    font-size: min(5.2vw, 9.2vh);
+                                    font-size: min(4vw, 6.5vh);
                                     line-height: 1.05;
                                     letter-spacing: -0.025em;
-                                    color: var(--paper);
                                 "
                             >
                                 Key Findings
@@ -2195,70 +2214,72 @@
                                 >
                             </h2>
                         </div>
-                        <div data-anim="towers" class="bar-towers">
-                            <div class="bar-tower" data-anim>
-                                <div class="body-block b-accent h-3">
-                                    <div class="lbl">Class Imbalance</div>
-                                    <div class="nb">
-                                        88.7<span class="unit">%</span>
+                        <div
+                            data-anim="content"
+                            style="
+                                display: grid;
+                                grid-template-columns: 1fr 1fr;
+                                gap: 1.8vw;
+                                flex: 1;
+                            "
+                        >
+                            <!-- LEFT: Bar Towers (2×2) -->
+                            <div data-anim="towers" class="bar-towers" style="gap:1.2vh; grid-template-columns: repeat(2, 1fr); align-content: center; margin-top: 0;">
+                                <div class="bar-tower" data-anim style="height:auto; justify-content:flex-start">
+                                    <div class="body-block b-accent" style="padding:2vh 1.6vw; min-height:16vh">
+                                        <div class="lbl">Class Imbalance</div>
+                                        <div class="nb">88.7<span class="unit">%</span></div>
+                                        <div class="sub">Majority "no". Accuracy is deceptive — baseline = 88.7%.</div>
                                     </div>
-                                    <div class="sub">
-                                        Majority class "no subscription".
-                                        Accuracy alone is meaningless — baseline
-                                        always predicting "no" scores 88.7%.
+                                </div>
+                                <div class="bar-tower" data-anim style="height:auto; justify-content:flex-start">
+                                    <div class="body-block" style="padding:2vh 1.6vw; min-height:16vh">
+                                        <div class="lbl">Duration Leakage</div>
+                                        <div class="nb">3–5<span class="unit">×</span></div>
+                                        <div class="sub">Subscribers stay on calls 3–5× longer. Post-hoc → leak.</div>
+                                    </div>
+                                </div>
+                                <div class="bar-tower" data-anim style="height:auto; justify-content:flex-start">
+                                    <div class="body-block" style="padding:2vh 1.6vw; min-height:16vh">
+                                        <div class="lbl">Economic Signal</div>
+                                        <div class="nb">Euribor</div>
+                                        <div class="sub">Euribor 3m ↔ subscription ρ ≈ −0.31. CPI & emp.var also matter.</div>
+                                    </div>
+                                </div>
+                                <div class="bar-tower" data-anim style="height:auto; justify-content:flex-start">
+                                    <div class="body-block" style="padding:2vh 1.6vw; min-height:16vh">
+                                        <div class="lbl">Key Categories</div>
+                                        <div class="nb">poutcome</div>
+                                        <div class="sub">Prior success = strongest categorical. Cellular > telephone.</div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="bar-tower" data-anim>
-                                <div class="body-block h-4">
-                                    <div class="lbl">Duration Leakage</div>
-                                    <div class="nb">
-                                        3–5<span class="unit">×</span>
-                                    </div>
-                                    <div class="sub">
-                                        Subscribers stay on calls 3–5× longer.
-                                        Post-hoc feature — unknown at prediction
-                                        time. Classic data leakage.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="bar-tower" data-anim>
-                                <div class="body-block h-2">
-                                    <div class="lbl">Economic Signal</div>
-                                    <div class="nb">Euribor</div>
-                                    <div class="sub">
-                                        Euribor 3m rate correlates with
-                                        subscription rates. Employment rate and
-                                        CPI also show significant trends.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="bar-tower" data-anim>
-                                <div class="body-block h-3">
-                                    <div class="lbl">Key Categories</div>
-                                    <div class="nb">poutcome</div>
-                                    <div class="sub">
-                                        Prior campaign success is the strongest
-                                        categorical predictor. Cellular >
-                                        telephone. Education and job matter.
-                                    </div>
-                                </div>
-                            </div>
+                            <!-- RIGHT: Categorical Analysis Figure -->
+                            <figure
+                                class="frame-img r-1x1 swiss-lined"
+                                style="background:#fff;flex:1;min-height:26vh"
+                            >
+                                <img
+                                    src="./figures/categorical_analysis.png"
+                                    alt="Categorical Analysis by Subscription Rate"
+                                    style="object-fit:contain"
+                                />
+                            </figure>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- ====== SLIDE 04 - ECONOMIC INDICATORS ====== -->
+            <!-- ====== SLIDE 05 - EDA: NUMERICAL DISTRIBUTIONS ====== -->
             <section
                 class="slide light"
-                data-layout="S04"
+                data-layout="S05"
                 data-animate="grid-reveal"
-            >
+             data-notes="Here we visualize how all 12 numerical features separate subscribers from non-subscribers. Each panel shows overlaid histograms — red for subscribers, blue for non-subscribers. The economic indicators, especially Euribor 3m and employment variation rate, show the clearest distribution shifts between the two classes. This confirms that macro-economic context matters for prediction.">
                 <div class="canvas-card">
-                    <div class="chrome-min">
-                        <div class="l">ECONOMIC INDICATORS</div>
-                        <div class="r">05 / 13</div>
+                    <div class="chrome-min tight">
+                        <div class="l">EDA: NUMERICAL FEATURES</div>
+                        <div class="r">05 / 23</div>
                     </div>
                     <div
                         style="
@@ -2266,33 +2287,26 @@
                             padding: 0;
                             display: grid;
                             grid-template-rows: auto 1fr;
-                            gap: 2.4vh;
+                            gap: 1.4vh;
                         "
                     >
                         <div
                             data-anim="head"
-                            style="
-                                display: flex;
-                                flex-direction: column;
-                                gap: 1.4vh;
-                            "
+                            style="display:flex;flex-direction:column;gap:0.8vh"
                         >
-                            <div class="t-meta">
-                                BONUS: EXTERNAL DATA FROM BANCO DE PORTUGAL
-                            </div>
+                            <div class="t-meta">DISTRIBUTIONS BY TARGET CLASS</div>
                             <h2
                                 style="
                                     font-family: var(--sans), var(--sans-zh);
                                     font-weight: 200;
-                                    font-size: min(5.2vw, 9.2vh);
-                                    line-height: 1.05;
+                                    font-size: min(4vw, 6.6vh);
+                                    line-height: 1.08;
                                     letter-spacing: -0.025em;
                                 "
                             >
-                                Macro-Economic
-                                <span
-                                    style="font-style: italic; font-weight: 300"
-                                    >Context</span
+                                How Numerical Features
+                                <span style="font-style:italic;font-weight:300"
+                                    >Separate Classes</span
                                 >
                             </h2>
                         </div>
@@ -2300,104 +2314,74 @@
                             data-anim="content"
                             style="
                                 display: grid;
-                                grid-template-columns: 1fr 1fr;
+                                grid-template-columns: 7fr 5fr;
                                 gap: 2vw;
                                 flex: 1;
-                                align-content: start;
                             "
                         >
-                            <figure class="frame-img r-16x10 swiss-lined">
+                            <!-- Full-width figure -->
+                            <figure
+                                class="frame-img r-16x9 swiss-lined"
+                                style="background:#fff;flex:1;min-height:24vh"
+                            >
                                 <img
-                                    src="./figures/economic_decile_analysis.png"
-                                    alt="Economic Indicator Decile Analysis"
-                                    style="
-                                        object-fit: contain;
-                                        background: #fff;
-                                    "
+                                    src="./figures/numerical_distributions.png"
+                                    alt="Numerical Feature Distributions by Target"
+                                    style="object-fit:contain"
                                 />
                             </figure>
-                            <div
-                                style="
-                                    display: flex;
-                                    flex-direction: column;
-                                    gap: 2vh;
-                                "
-                            >
+                            <!-- Key insights panel -->
+                            <div style="display:flex;flex-direction:column;gap:2vh">
                                 <div
                                     class="card-fill"
                                     style="
-                                        padding: 1.8vh 1.6vw;
+                                        padding: 2vh 1.6vw;
                                         border-left: 3px solid var(--accent);
                                     "
                                 >
-                                    <div class="t-body-emp">
-                                        5 Portuguese economic indicators
+                                    <div class="t-body-sm" style="font-size:max(18px,1.1vw);line-height:1.55;color:var(--text-secondary)">
+                                        <strong style="color:var(--accent)">All 12 numerical features</strong>
+                                        shown as overlaid histograms — subscribers (red) vs non-subscribers (blue).
+                                        Values capped at 99th percentile to reduce outlier distortion.
                                     </div>
-                                    <div
-                                        class="t-body-sm"
-                                        style="margin-top: 0.6vh"
-                                    >
-                                        emp.var.rate, cons.price.idx,
-                                        cons.conf.idx, euribor3m, nr.employed —
-                                        sourced from Banco de Portugal,
-                                        reflecting the 2008–2010 financial
-                                        crisis recovery.
+                                </div>
+                                <div
+                                    style="
+                                        display: grid;
+                                        grid-template-columns: 1fr 1fr;
+                                        gap: 1.2vw;
+                                    "
+                                >
+                                    <div class="card-fill" style="padding:2vh 1.4vw;text-align:center;border-top:3px solid var(--accent);background:#fff">
+                                        <div style="font-family:var(--sans);font-weight:500;font-size:min(2.4vw,4vh);line-height:1;color:var(--accent)">euribor3m</div>
+                                        <div class="t-body-sm" style="color:var(--text-helper);font-size:max(14px,0.85vw);margin-top:0.6vh">Strongest econ. separator</div>
+                                    </div>
+                                    <div class="card-fill" style="padding:2vh 1.4vw;text-align:center;border-top:3px solid var(--accent);background:#fff">
+                                        <div style="font-family:var(--sans);font-weight:500;font-size:min(2.4vw,4vh);line-height:1;color:var(--accent)">nr.employed</div>
+                                        <div class="t-body-sm" style="color:var(--text-helper);font-size:max(14px,0.85vw);margin-top:0.6vh">ρ=0.94 with euribor3m</div>
+                                    </div>
+                                    <div class="card-fill" style="padding:2vh 1.4vw;text-align:center;border-top:3px solid var(--accent);background:#fff">
+                                        <div style="font-family:var(--sans);font-weight:500;font-size:min(2.4vw,4vh);line-height:1;color:var(--accent)">pdays</div>
+                                        <div class="t-body-sm" style="color:var(--text-helper);font-size:max(14px,0.85vw);margin-top:0.6vh">999 = never contacted</div>
+                                    </div>
+                                    <div class="card-fill" style="padding:2vh 1.4vw;text-align:center;border-top:3px solid var(--accent);background:#fff">
+                                        <div style="font-family:var(--sans);font-weight:500;font-size:min(2.4vw,4vh);line-height:1;color:var(--accent)">campaign</div>
+                                        <div class="t-body-sm" style="color:var(--text-helper);font-size:max(14px,0.85vw);margin-top:0.6vh">More contacts ≠ more subs</div>
                                     </div>
                                 </div>
                                 <div
                                     class="card-fill"
                                     style="
-                                        padding: 1.8vh 1.6vw;
+                                        padding: 2vh 1.6vw;
                                         border-left: 3px solid var(--accent);
+                                        background: rgba(0,47,167,0.04);
                                     "
                                 >
-                                    <div class="t-body-emp">
-                                        Euribor 3m: strongest inverse
-                                        correlation
-                                    </div>
-                                    <div
-                                        class="t-body-sm"
-                                        style="margin-top: 0.6vh"
-                                    >
-                                        When interest rates fall, term deposits
-                                        become less attractive — yet
-                                        subscription rates rose during the
-                                        crisis period (counterintuitive recovery
-                                        signal).
-                                    </div>
-                                </div>
-                                <div
-                                    class="card-fill"
-                                    style="
-                                        padding: 1.8vh 1.6vw;
-                                        border-left: 3px solid var(--accent);
-                                    "
-                                >
-                                    <div class="t-body-emp">
-                                        Multicollinearity present
-                                    </div>
-                                    <div
-                                        class="t-body-sm"
-                                        style="margin-top: 0.6vh"
-                                    >
-                                        euribor3m ↔ nr.employed: ρ = 0.94.
-                                        Tree-based models handle naturally;
-                                        Logistic Regression needs
-                                        regularization.
-                                    </div>
-                                </div>
-                                <div
-                                    class="card-accent"
-                                    style="padding: 1.4vh 1.6vw"
-                                >
-                                    <div
-                                        class="t-body-sm"
-                                        style="color: rgba(255, 255, 255, 0.82)"
-                                    >
-                                        Decile scatter analysis confirms:
-                                        economic features demonstrably improve
-                                        prediction — all 5 rank in top-20
-                                        importance.
+                                    <div class="t-body-sm" style="font-size:max(17px,1vw);line-height:1.55;color:var(--text-secondary)">
+                                        <strong style="color:var(--accent)">Key takeaway:</strong>
+                                        Economic indicators (highlighted in red titles) show clear distribution shifts
+                                        between subscribers and non-subscribers. Euribor 3m and emp.var.rate
+                                        exhibit the strongest separation among external features.
                                     </div>
                                 </div>
                             </div>
@@ -2406,16 +2390,366 @@
                 </div>
             </section>
 
-            <!-- ====== SLIDE 05 - FEATURE ENGINEERING ====== -->
+            <!-- ====== SLIDE 06 - EDA DEEP DIVE: CODE & VISUALIZATIONS ====== -->
+            <section
+                class="slide light"
+                data-layout="S04a"
+                data-animate="grid-reveal"
+             data-notes="This slide shows the actual Python code we used for initial data inspection — loading the data, checking the target distribution, and running correlation analysis. The code reveals that euribor3m and nr.employed have a correlation of 0.94 — that's multicollinearity, which favors tree-based models over linear ones.">
+                <div class="canvas-card">
+                    <div class="chrome-min tight">
+                        <div class="l">EDA DEEP DIVE</div>
+                        <div class="r">06 / 23</div>
+                    </div>
+                    <div
+                        style="
+                            flex: 1;
+                            padding: 0;
+                            display: grid;
+                            grid-template-rows: auto 1fr;
+                            gap: 1.6vh;
+                        "
+                    >
+                        <div
+                            data-anim="head"
+                            style="display:flex;flex-direction:column;gap:1vh"
+                        >
+                            <div class="t-meta">CODE SNIPPETS & ANALYTIC METRICS</div>
+                            <h2
+                                style="
+                                    font-family: var(--sans), var(--sans-zh);
+                                    font-weight: 200;
+                                    font-size: min(4.2vw, 7vh);
+                                    line-height: 1.08;
+                                    letter-spacing: -0.025em;
+                                "
+                            >
+                                How We Explored
+                                <span style="font-style:italic;font-weight:300">the Data</span>
+                            </h2>
+                        </div>
+                        <div
+                            data-anim="content"
+                            style="
+                                display: grid;
+                                grid-template-columns: 5fr 7fr;
+                                gap: 2vw;
+                                flex: 1;
+                                align-content: start;
+                            "
+                        >
+                            <!-- LEFT: Code Snippets -->
+                            <div style="display:flex;flex-direction:column;gap:1.6vh">
+                                <!-- Snippet 1: Load & Inspect -->
+                                <div
+                                    class="card-fill"
+                                    style="
+                                        padding: 1.2vh 1.2vw;
+                                        border-left: 3px solid var(--accent);
+                                    "
+                                >
+                                    <div
+                                        class="t-meta"
+                                        style="font-size:10px;margin-bottom:0.6vh"
+                                    >
+                                        LOAD & INSPECT
+                                    </div>
+                                    <pre
+                                        style="
+                                            font-family: var(--mono);
+                                            font-size: 13px;
+                                            line-height: 1.5;
+                                            color: var(--text-secondary);
+                                            background: var(--grey-1);
+                                            padding: 1.2vh 1.2vw;
+                                            border-radius: 4px;
+                                            overflow-x: auto;
+                                            white-space: pre-wrap;
+                                            word-break: break-all;
+                                        "
+>df = pd.read_csv('data/bank-additional-full.csv', sep=';')
+print(f'Shape: {df.shape}')    <span style="color:var(--grey-3)"># (41188, 21)</span>
+print(f'Target: {df["y"].value_counts().to_dict()}')
+<span style="color:var(--grey-3)"># {'no': 36548, 'yes': 4640} → 88.7% vs 11.3%</span>
+df.describe().T  <span style="color:var(--grey-3)"># summary stats all numeric cols</span></pre>
+                                </div>
+
+                                <!-- Snippet 2: Target & Class Imbalance -->
+                                <div
+                                    class="card-fill"
+                                    style="
+                                        padding: 1.2vh 1.2vw;
+                                        border-left: 3px solid var(--accent);
+                                    "
+                                >
+                                    <div
+                                        class="t-meta"
+                                        style="font-size:10px;margin-bottom:0.6vh"
+                                    >
+                                        TARGET DISTRIBUTION
+                                    </div>
+                                    <pre
+                                        style="
+                                            font-family: var(--mono);
+                                            font-size: 13px;
+                                            line-height: 1.5;
+                                            color: var(--text-secondary);
+                                            background: var(--grey-1);
+                                            padding: 1.2vh 1.2vw;
+                                            border-radius: 4px;
+                                            overflow-x: auto;
+                                            white-space: pre-wrap;
+                                            word-break: break-all;
+                                        "
+>counts = df['y'].value_counts()
+baseline_acc = counts.max() / len(df) * 100
+<span style="color:var(--grey-3)"># Baseline: always predict "no" → 88.7% accuracy</span>
+<span style="color:var(--grey-3)"># Accuracy alone is DECEPTIVE for imbalanced data!</span></pre>
+                                </div>
+
+                                <!-- Snippet 3: Correlation Analysis -->
+                                <div
+                                    class="card-fill"
+                                    style="
+                                        padding: 1.2vh 1.2vw;
+                                        border-left: 3px solid var(--accent);
+                                    "
+                                >
+                                    <div
+                                        class="t-meta"
+                                        style="font-size:10px;margin-bottom:0.6vh"
+                                    >
+                                        CORRELATION & MISSING VALUES
+                                    </div>
+                                    <pre
+                                        style="
+                                            font-family: var(--mono);
+                                            font-size: 13px;
+                                            line-height: 1.5;
+                                            color: var(--text-secondary);
+                                            background: var(--grey-1);
+                                            padding: 1.2vh 1.2vw;
+                                            border-radius: 4px;
+                                            overflow-x: auto;
+                                            white-space: pre-wrap;
+                                            word-break: break-all;
+                                        "
+>corr = df[numerical_cols + ['y_encoded']].corr()
+<span style="color:var(--grey-3)"># euribor3m ↔ nr.employed: ρ ≈ 0.94 (multicollinearity!)</span>
+<span style="color:var(--grey-3)"># euribor3m ↔ y_encoded: ρ ≈ -0.31 (strongest econ signal)</span>
+df.isnull().sum()  <span style="color:var(--grey-3)"># 0 NaN values</span>
+<span style="color:var(--grey-3)"># But "unknown" appears in 6 categorical cols</span>
+<span style="color:var(--grey-3)">#   → treated as a VALID category, not missing</span></pre>
+                                </div>
+                            </div>
+
+                            <!-- RIGHT: Target Distribution -->
+                            <figure
+                                class="frame-img r-4x3 swiss-lined"
+                                style="background:#fff;flex:1"
+                            >
+                                <img
+                                    src="./figures/target_distribution.png"
+                                    alt="Target Distribution"
+                                    style="object-fit:contain"
+                                />
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ====== SLIDE 06B - KEY METRICS & CORRELATION ====== -->
+            <section class="slide light" data-layout="S06b" data-animate="grid-reveal" data-notes="Four key numbers to remember: 41,188 samples, 21 features, only 11.3% positive class, and a multicollinearity of 0.94 between the top two economic indicators. The correlation heatmap on the right shows how features cluster — demographic features form one block, economic indicators another. Our key insight: severe class imbalance means accuracy is meaningless. We need metrics like F1, precision, recall, and ROC-AUC. With that, I'll hand over to [Speaker 2] for the modeling pipeline.">
+                <div class="canvas-card">
+                    <div class="chrome-min tight">
+                        <div class="l">EDA DEEP DIVE</div>
+                        <div class="r">07 / 23</div>
+                    </div>
+                    <div style="flex:1;padding:0;display:grid;grid-template-rows:auto 1fr;gap:1.6vh">
+                        <div data-anim="head" style="display:flex;flex-direction:column;gap:1vh">
+                            <div class="t-meta">KEY METRICS & CORRELATION ANALYSIS</div>
+                            <h2 style="font-family:var(--sans),var(--sans-zh);font-weight:200;font-size:min(4.2vw,7vh);line-height:1.08;letter-spacing:-.025em">
+                                Key Metrics <span style="font-style:italic;font-weight:300">& Correlations</span>
+                            </h2>
+                        </div>
+                        <div data-anim="content" style="display:grid;grid-template-columns:5fr 7fr;gap:2vw;flex:1">
+                            <div style="display:flex;flex-direction:column;gap:2vh">
+                                <div style="display:grid;grid-template-columns:repeat(2,1fr);grid-template-rows:1fr 1fr;gap:1.2vw;flex:1">
+                                    <div class="card-fill" style="padding:2vh 1.4vw;text-align:center;border-top:3px solid var(--accent);display:flex;flex-direction:column;justify-content:center">
+                                        <div style="font-family:var(--sans);font-weight:200;font-size:min(3.5vw,6vh);line-height:1;color:var(--ink)">41,188</div>
+                                        <div class="t-body-sm" style="color:var(--text-secondary);font-size:max(15px,0.9vw);margin-top:0.8vh">Total Samples</div>
+                                    </div>
+                                    <div class="card-fill" style="padding:2vh 1.4vw;text-align:center;border-top:3px solid var(--accent);display:flex;flex-direction:column;justify-content:center">
+                                        <div style="font-family:var(--sans);font-weight:200;font-size:min(3.5vw,6vh);line-height:1;color:var(--ink)">11.3%</div>
+                                        <div class="t-body-sm" style="color:var(--text-secondary);font-size:max(15px,0.9vw);margin-top:0.8vh">Positive Class</div>
+                                    </div>
+                                    <div class="card-fill" style="padding:2vh 1.4vw;text-align:center;border-top:3px solid var(--accent);display:flex;flex-direction:column;justify-content:center">
+                                        <div style="font-family:var(--sans);font-weight:200;font-size:min(3.5vw,6vh);line-height:1;color:var(--ink)">21</div>
+                                        <div class="t-body-sm" style="color:var(--text-secondary);font-size:max(15px,0.9vw);margin-top:0.8vh">Features</div>
+                                    </div>
+                                    <div class="card-fill" style="padding:2vh 1.4vw;text-align:center;border-top:3px solid var(--accent);display:flex;flex-direction:column;justify-content:center">
+                                        <div style="font-family:var(--sans);font-weight:200;font-size:min(3.5vw,6vh);line-height:1;color:var(--ink)">ρ=0.94</div>
+                                        <div class="t-body-sm" style="color:var(--text-secondary);font-size:max(15px,0.9vw);margin-top:0.8vh">Max Multicoll.</div>
+                                    </div>
+                                </div>
+                                <div class="card-fill" style="padding:1.6vh 1.4vw;border-left:3px solid var(--accent);background:rgba(0,47,167,0.04)">
+                                    <div class="t-body-sm" style="font-size:max(16px,0.95vw);color:var(--text-secondary);line-height:1.55">
+                                        <strong style="color:var(--accent)">Key Insight:</strong>
+                                        Severe class imbalance (88.7/11.3) makes accuracy misleading.
+                                        Euribor 3m ↔ subscription ρ = −0.31. Multicollinearity
+                                        (euribor3m & nr.employed ρ = 0.94) favors tree-based models.
+                                    </div>
+                                </div>
+                            </div>
+                            <figure class="frame-img r-1x1 swiss-lined" style="background:#fff;flex:1;min-height:24vh">
+                                <img src="./figures/correlation_heatmap.png"
+                                    alt="Correlation Heatmap"
+                                    style="object-fit:contain" />
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ====== SLIDE 07 - ECONOMIC INDICATORS: TIME SERIES ====== -->
+            <section
+                class="slide light"
+                data-layout="S07"
+                data-animate="grid-reveal"
+             data-notes="Thank you, [Speaker 1]. Now let me show you what makes this dataset special. Beyond the standard marketing data, we collected 5 macro-economic indicators from Banco de Portugal spanning May 2008 to November 2010. This covers the financial crisis recovery period — a time of dramatic economic change. In these time-series charts, the red fill shows the rolling subscription rate, and the dark line tracks each economic indicator. Notice Euribor 3m — as interest rates plunged during the crisis, subscription behavior shifted measurably. This is a bonus contribution to the project: external data beyond the standard UCI repository.">
+                <div class="canvas-card">
+                    <div class="chrome-min tight">
+                        <div class="l">ECONOMIC INDICATORS</div>
+                        <div class="r">08 / 23</div>
+                    </div>
+                    <div
+                        style="
+                            flex: 1;
+                            padding: 0;
+                            display: grid;
+                            grid-template-rows: auto 1fr;
+                            gap: 1.4vh;
+                        "
+                    >
+                        <div data-anim="head" style="display:flex;flex-direction:column;gap:0.6vh">
+                            <div class="t-meta">BONUS: EXTERNAL DATA FROM BANCO DE PORTUGAL</div>
+                            <h2 style="font-family:var(--sans),var(--sans-zh);font-weight:200;font-size:min(3.8vw,6vh);line-height:1.05;letter-spacing:-0.025em">
+                                Macro-Economic <span style="font-style:italic;font-weight:300">Timeline</span>
+                            </h2>
+                        </div>
+                        <div data-anim="content" style="display:grid;grid-template-columns:7fr 5fr;gap:2vw;flex:1">
+                            <figure class="frame-img r-1x1 swiss-lined" style="background:#fff;flex:1;min-height:30vh">
+                                <img src="./figures/economic_indicators_time_series.png"
+                                    alt="Economic Indicators Time Series vs Subscription Rate"
+                                    style="object-fit:contain" />
+                            </figure>
+                            <div style="display:flex;flex-direction:column;gap:2vh">
+                                <div class="card-fill" style="padding:2vh 1.6vw;border-left:3px solid var(--accent)">
+                                    <div class="t-body-sm" style="font-size:max(17px,1vw);line-height:1.55;color:var(--text-secondary)">
+                                        <strong style="color:var(--accent)">5 indicators from Banco de Portugal:</strong>
+                                        emp.var.rate, cons.price.idx, cons.conf.idx, euribor3m, nr.employed —
+                                        spanning May 2008 to November 2010 (financial crisis recovery).
+                                    </div>
+                                </div>
+                                <div class="card-fill" style="padding:2vh 1.6vw;border-left:3px solid var(--accent)">
+                                    <div class="t-body-sm" style="font-size:max(17px,1vw);line-height:1.55;color:var(--text-secondary)">
+                                        <strong style="color:var(--accent)">Red fill</strong> = rolling subscription rate (window=2000).
+                                        <strong style="color:var(--accent)">Dark line</strong> = economic indicator value.
+                                        Dual-axis reveals how macro trends coincide with subscription behavior.
+                                    </div>
+                                </div>
+                                <div class="card-fill" style="padding:2vh 1.6vw;border-left:3px solid var(--accent)">
+                                    <div class="t-body-sm" style="font-size:max(17px,1vw);line-height:1.55;color:var(--text-secondary)">
+                                        <strong style="color:var(--accent)">Key observation:</strong> Euribor 3m (interbank rate)
+                                        shows the strongest inverse relationship. As the crisis deepened and rates fell,
+                                        subscription patterns shifted — economic context demonstrably matters for prediction.
+                                    </div>
+                                </div>
+                                <div class="card-accent" style="padding:1.6vh 1.4vw">
+                                    <div class="t-body-sm" style="color:rgba(255,255,255,0.85);font-size:max(14px,0.85vw)">
+                                        Bonus contribution: external data collection beyond the base UCI dataset.
+                                        All 5 indicators are publicly available from Banco de Portugal.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ====== SLIDE 08 - ECONOMIC INDICATORS: DECILE ANALYSIS ====== -->
+            <section
+                class="slide light"
+                data-layout="S08"
+                data-animate="grid-reveal"
+             data-notes="To quantify the relationship, we use decile scatter analysis. Each dot represents one decile of an economic indicator, plotted against subscription probability. Point size shows sample count, and the dashed red line shows the linear trend. Key findings: Euribor 3m shows the strongest inverse correlation at rho = -0.31. Employment variation rate also negatively correlated — rising unemployment means lower subscription probability. Consumer price index shows positive correlation — higher inflation may push savers toward fixed-income products. All five indicators show meaningful relationships with subscriptions.">
+                <div class="canvas-card">
+                    <div class="chrome-min tight">
+                        <div class="l">ECONOMIC INDICATORS</div>
+                        <div class="r">09 / 23</div>
+                    </div>
+                    <div
+                        style="
+                            flex: 1;
+                            padding: 0;
+                            display: grid;
+                            grid-template-rows: auto 1fr;
+                            gap: 1.4vh;
+                        "
+                    >
+                        <div data-anim="head" style="display:flex;flex-direction:column;gap:0.6vh">
+                            <div class="t-meta">DECILE SCATTER ANALYSIS</div>
+                            <h2 style="font-family:var(--sans),var(--sans-zh);font-weight:200;font-size:min(3.8vw,6vh);line-height:1.05;letter-spacing:-0.025em">
+                                How Indicators <span style="font-style:italic;font-weight:300">Correlate</span> with Subscriptions
+                            </h2>
+                        </div>
+                        <div data-anim="content" style="display:grid;grid-template-columns:7fr 5fr;gap:2vw;flex:1">
+                            <figure class="frame-img r-16x9 swiss-lined" style="background:#fff;flex:1;min-height:24vh">
+                                <img src="./figures/economic_decile_analysis.png"
+                                    alt="Economic Indicator Decile Analysis"
+                                    style="object-fit:contain" />
+                            </figure>
+                            <div style="display:flex;flex-direction:column;gap:2vh">
+                                <div class="card-fill" style="padding:2vh 1.6vw;border-left:3px solid var(--accent)">
+                                    <div class="t-body-emp" style="font-size:max(18px,1.1vw)">Euribor 3m: strongest inverse correlation (ρ = −0.31)</div>
+                                    <div class="t-body-sm" style="margin-top:0.6vh;font-size:max(15px,0.9vw)">When interest rates fall, term deposits become less attractive — yet subscription rates rose during crisis.</div>
+                                </div>
+                                <div class="card-fill" style="padding:2vh 1.6vw;border-left:3px solid var(--accent)">
+                                    <div class="t-body-emp" style="font-size:max(18px,1.1vw)">emp.var.rate: negative correlation</div>
+                                    <div class="t-body-sm" style="margin-top:0.6vh;font-size:max(15px,0.9vw)">Rising unemployment coincides with lower subscriptions — economic stress reduces savings capacity.</div>
+                                </div>
+                                <div class="card-fill" style="padding:2vh 1.6vw;border-left:3px solid var(--accent)">
+                                    <div class="t-body-emp" style="font-size:max(18px,1.1vw)">cons.price.idx: positive correlation</div>
+                                    <div class="t-body-sm" style="margin-top:0.6vh;font-size:max(15px,0.9vw)">Higher inflation may drive savers toward fixed-income products like term deposits.</div>
+                                </div>
+                                <div class="card-fill" style="padding:2vh 1.6vw;border-left:3px solid var(--accent)">
+                                    <div class="t-body-emp" style="font-size:max(18px,1.1vw)">Multicollinearity: euribor3m ↔ nr.employed (ρ = 0.94)</div>
+                                    <div class="t-body-sm" style="margin-top:0.6vh;font-size:max(15px,0.9vw)">Tree-based models handle naturally; Logistic Regression needs regularization.</div>
+                                </div>
+                                <div class="card-accent" style="padding:1.6vh 1.4vw">
+                                    <div class="t-body-sm" style="color:rgba(255,255,255,0.85);font-size:max(14px,0.85vw)">
+                                        <strong>Decile analysis:</strong> each dot = one decile of the economic indicator.
+                                        Point size = sample count. Dashed red line = linear trend. All 5 indicators
+                                        show meaningful correlation with subscription probability.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ====== SLIDE 07 - FEATURE ENGINEERING ====== -->
             <section
                 class="slide light"
                 data-layout="S05"
                 data-animate="grid-reveal"
-            >
+             data-notes="Now, our four engineered features — this is where we add real predictive signal beyond the raw data. First, pdays_was_contacted: a binary flag that decouples the '999' sentinel from the numeric scale. pdays=999 means 'never contacted' — that's a categorical distinction, not a measurement. Second, engagement_score: inspired by RFM analysis — how engaged is the client relative to contact frequency? Higher means proven contact history with fewer touches needed. Third, loan_burden: total active loans — captures combined financial pressure from housing and personal loans. Fourth, euribor_cpi_spread: the real interest rate proxy — when the spread is positive, term deposits are more attractive relative to inflation.">
                 <div class="canvas-card">
                     <div class="chrome-min">
                         <div class="l">FEATURE ENGINEERING</div>
-                        <div class="r">06 / 13</div>
+                        <div class="r">10 / 23</div>
                     </div>
                     <div
                         style="
@@ -2454,10 +2788,10 @@
                         <div
                             style="
                                 display: grid;
-                                grid-template-columns: repeat(4, 1fr);
-                                gap: 1.4vw;
+                                grid-template-columns: repeat(2, 1fr);
+                                grid-template-rows: 1fr 1fr;
+                                gap: var(--sp-6);
                                 flex: 1;
-                                align-content: start;
                             "
                         >
                             <div
@@ -2470,20 +2804,20 @@
                                     border-top: 2px solid var(--accent);
                                 "
                             >
-                                <div class="t-cat accent">01 - BINARY FLAG</div>
-                                <div class="t-body-emp">
+                                <div class="t-cat accent" style="font-size:max(20px,1.2vw)">01 - BINARY FLAG</div>
+                                <div class="t-body-emp" style="font-size:max(24px,1.4vw)">
                                     pdays_was_contacted
                                 </div>
                                 <div
                                     class="t-meta"
                                     style="
-                                        font-size: 13px;
+                                        font-size: max(20px, 1.2vw);
                                         color: var(--text-helper);
                                     "
                                 >
                                     pdays ≠ 999 → 1
                                 </div>
-                                <div class="t-body-sm">
+                                <div class="t-body-sm" style="font-size:max(19px,1.1vw);line-height:1.5">
                                     Decouples the 999 sentinel from the numeric
                                     scale. pdays=999 means "never contacted" — a
                                     categorical distinction, not a measurement.
@@ -2499,20 +2833,20 @@
                                     border-top: 2px solid var(--accent);
                                 "
                             >
-                                <div class="t-cat accent">
+                                <div class="t-cat accent" style="font-size:max(20px,1.2vw)">
                                     02 - RFM-INSPIRED
                                 </div>
-                                <div class="t-body-emp">engagement_score</div>
+                                <div class="t-body-emp" style="font-size:max(24px,1.4vw)">engagement_score</div>
                                 <div
                                     class="t-meta"
                                     style="
-                                        font-size: 13px;
+                                        font-size: max(20px, 1.2vw);
                                         color: var(--text-helper);
                                     "
                                 >
                                     (previous+1) / (campaign+1)
                                 </div>
-                                <div class="t-body-sm">
+                                <div class="t-body-sm" style="font-size:max(19px,1.1vw);line-height:1.5">
                                     How engaged is the client relative to
                                     contact frequency? Higher = proven contact
                                     history with fewer touches needed.
@@ -2528,18 +2862,18 @@
                                     border-top: 2px solid var(--accent);
                                 "
                             >
-                                <div class="t-cat accent">03 - INTERACTION</div>
-                                <div class="t-body-emp">loan_burden</div>
+                                <div class="t-cat accent" style="font-size:max(20px,1.2vw)">03 - INTERACTION</div>
+                                <div class="t-body-emp" style="font-size:max(24px,1.4vw)">loan_burden</div>
                                 <div
                                     class="t-meta"
                                     style="
-                                        font-size: 13px;
+                                        font-size: max(20px, 1.2vw);
                                         color: var(--text-helper);
                                     "
                                 >
                                     housing_bin + loan_bin
                                 </div>
-                                <div class="t-body-sm">
+                                <div class="t-body-sm" style="font-size:max(19px,1.1vw);line-height:1.5">
                                     Total active loans (0, 1, or 2). Captures
                                     the combined financial pressure from housing
                                     + personal loans.
@@ -2555,18 +2889,18 @@
                                     border-top: 2px solid var(--accent);
                                 "
                             >
-                                <div class="t-cat accent">04 - MACRO PROXY</div>
-                                <div class="t-body-emp">euribor_cpi_spread</div>
+                                <div class="t-cat accent" style="font-size:max(20px,1.2vw)">04 - MACRO PROXY</div>
+                                <div class="t-body-emp" style="font-size:max(24px,1.4vw)">euribor_cpi_spread</div>
                                 <div
                                     class="t-meta"
                                     style="
-                                        font-size: 13px;
+                                        font-size: max(20px, 1.2vw);
                                         color: var(--text-helper);
                                     "
                                 >
                                     euribor3m − CPI/100
                                 </div>
-                                <div class="t-body-sm">
+                                <div class="t-body-sm" style="font-size:max(19px,1.1vw);line-height:1.5">
                                     Real interest rate proxy. Positive spread =
                                     term deposits more economically attractive
                                     relative to inflation.
@@ -2600,16 +2934,16 @@
                 </div>
             </section>
 
-            <!-- ====== SLIDE 06 - PREPROCESSING PIPELINE ====== -->
+            <!-- ====== SLIDE 08 - PREPROCESSING PIPELINE ====== -->
             <section
-                class="slide dark"
+                class="slide light"
                 data-layout="S06"
                 data-animate="timeline-walk"
-            >
+             data-notes="Our full preprocessing pipeline has five steps. Importantly, we treat 'unknown' values as a valid category — not missing data. Our analysis showed they carry predictive signal. After encoding, we have 53 features ready for modeling.">
                 <div class="canvas-card">
                     <div class="chrome-min">
                         <div class="l">PREPROCESSING PIPELINE</div>
-                        <div class="r">07 / 13</div>
+                        <div class="r">11 / 23</div>
                     </div>
                     <div
                         style="
@@ -2630,7 +2964,6 @@
                         >
                             <div
                                 class="t-meta"
-                                style="color: rgba(255, 255, 255, 0.62)"
                             >
                                 5 STEPS - 53 FEATURES AFTER ENCODING
                             </div>
@@ -2641,7 +2974,6 @@
                                     font-size: min(5.2vw, 9.2vh);
                                     line-height: 1.05;
                                     letter-spacing: -0.025em;
-                                    color: var(--paper);
                                 "
                             >
                                 From Raw Data to
@@ -2736,7 +3068,7 @@
                             data-anim="note"
                             class="t-helper"
                             style="
-                                color: rgba(255, 255, 255, 0.55);
+                                color: var(--text-helper);
                                 margin-top: auto;
                                 padding-top: 2vh;
                                 border-top: 1px solid rgba(255, 255, 255, 0.12);
@@ -2750,24 +3082,24 @@
                 </div>
             </section>
 
-            <!-- ====== SLIDE 07 - MODEL BENCHMARK ====== -->
+            <!-- ====== SLIDE 09 - MODEL BENCHMARK ====== -->
             <section
                 class="slide light"
                 data-layout="S07"
                 data-animate="grid-reveal"
-            >
+             data-notes="We benchmarked three models: Logistic Regression, Random Forest, and XGBoost — all trained on SMOTE-balanced data with 5-fold stratified cross-validation. The results are clear. XGBoost dominates across all metrics: CV AUC 0.972, CV F1 0.929, CV Precision 0.954, CV Recall 0.905. However — and this is crucial — on the original imbalanced test set, XGBoost precision drops to 0.561. That's still 5 times better than the 11.3% baseline, but it shows the real-world challenge.">
                 <div class="canvas-card">
                     <div class="chrome-min tight">
                         <div class="l">MODEL BENCHMARK</div>
-                        <div class="r">08 / 13</div>
+                        <div class="r">12 / 23</div>
                     </div>
                     <div
                         style="
                             flex: 1;
                             padding: 0;
-                            display: flex;
-                            flex-direction: column;
-                            gap: 2vh;
+                            display: grid;
+                            grid-template-rows: auto 1fr;
+                            gap: 1vh;
                         "
                     >
                         <div
@@ -2775,7 +3107,7 @@
                             style="
                                 display: flex;
                                 flex-direction: column;
-                                gap: 1vh;
+                                gap: 0.4vh;
                             "
                         >
                             <div class="t-meta">
@@ -2785,7 +3117,7 @@
                                 style="
                                     font-family: var(--sans), var(--sans-zh);
                                     font-weight: 200;
-                                    font-size: min(4.6vw, 8vh);
+                                    font-size: min(3.4vw, 5.6vh);
                                     line-height: 1.05;
                                     letter-spacing: -0.025em;
                                 "
@@ -2798,12 +3130,30 @@
                             </h2>
                         </div>
                         <div
+                            data-anim="content"
+                            style="
+                                display: grid;
+                                grid-template-columns: 7fr 5fr;
+                                gap: 2vw;
+                                flex: 1;
+                            "
+                        >
+                            <!-- LEFT: CV Comparison Bar Chart -->
+                            <figure class="frame-img r-16x9 swiss-lined" style="background:#fff;flex:1;min-height:24vh">
+                                <img
+                                    src="./figures/cv_comparison.png"
+                                    alt="Cross-Validation Comparison"
+                                    style="object-fit:contain"
+                                />
+                            </figure>
+                            <!-- RIGHT: Two tables stacked -->
+                            <div style="display:flex;flex-direction:column;gap:1.2vh;overflow-y:auto">
+                            <div
                             data-anim="tables"
                             style="
                                 display: grid;
-                                grid-template-columns: 1fr 1fr;
-                                gap: 2vw;
-                                flex: 1;
+                                grid-template-columns: 1fr;
+                                gap: 1.4vh;
                                 align-content: start;
                             "
                         >
@@ -3386,20 +3736,129 @@
                                 >
                             </div>
                         </div>
+                            </div><!-- close right stacked tables -->
+                        </div><!-- close left-right content grid -->
                     </div>
                 </div>
             </section>
 
-            <!-- ====== SLIDE 08 - EVALUATION & SHAP ====== -->
+            <!-- ====== SLIDE 10 - FEATURE IMPORTANCE ====== -->
             <section
-                class="slide dark"
+                class="slide light"
+                data-layout="S10"
+                data-animate="grid-reveal"
+             data-notes="Which features drive predictions? On the left, we see the top-20 features from both Random Forest and XGBoost. Our engineered features — especially engagement_score and euribor_cpi_spread — rank alongside the strongest economic indicators. On the right, the SHAP waterfall chart explains a single prediction. Red pushes the prediction toward 'subscribe', blue pushes away. This per-client interpretability is critical for stakeholder trust — the bank can explain WHY a particular customer was targeted, not just THAT they were.">
+                <div class="canvas-card">
+                    <div class="chrome-min tight">
+                        <div class="l">FEATURE IMPORTANCE</div>
+                        <div class="r">13 / 23</div>
+                    </div>
+                    <div
+                        style="
+                            flex: 1;
+                            padding: 0;
+                            display: grid;
+                            grid-template-rows: auto 1fr;
+                            gap: 0.8vh;
+                        "
+                    >
+                        <div
+                            data-anim="head"
+                            style="display:flex;flex-direction:column;gap:0.4vh"
+                        >
+                            <div class="t-meta">RF + XGBOOST TOP-20 · SHAP WATERFALL</div>
+                            <h2
+                                style="
+                                    font-family: var(--sans), var(--sans-zh);
+                                    font-weight: 200;
+                                    font-size: min(3vw, 5vh);
+                                    line-height: 1.06;
+                                    letter-spacing: -0.025em;
+                                "
+                            >
+                                Which Features
+                                <span style="font-style:italic;font-weight:300">Drive Predictions</span>
+                            </h2>
+                        </div>
+                        <div
+                            data-anim="content"
+                            style="
+                                display: grid;
+                                grid-template-rows: auto auto;
+                                gap: var(--sp-5);
+                                flex: 1;
+                                min-height: 0;
+                                align-content: start;
+                            "
+                        >
+                            <!-- TOP: Two Figures side by side -->
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.6vw;min-height:0">
+                                <figure
+                                    class="frame-img r-4x3 swiss-lined"
+                                    style="background:#fff;flex:1;min-height:0"
+                                >
+                                    <img
+                                        src="./figures/feature_importance.png"
+                                        alt="RF & XGBoost Feature Importance Top-20"
+                                        style="object-fit:contain"
+                                    />
+                                </figure>
+                                <figure
+                                    class="frame-img r-4x3 swiss-lined"
+                                    style="background:#fff;flex:1;min-height:0"
+                                >
+                                    <img
+                                        src="./figures/shap_waterfall.png"
+                                        alt="SHAP Waterfall - Single Prediction"
+                                        style="object-fit:contain"
+                                    />
+                                </figure>
+                            </div>
+                            <!-- BOTTOM: Two Cards side by side -->
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.2vw">
+                                <div
+                                    class="card-fill"
+                                    style="
+                                        padding: 1.4vh 1.2vw;
+                                        border-left: 3px solid var(--accent);
+                                    "
+                                >
+                                    <div class="t-body-sm" style="line-height:1.5;color:var(--text-secondary);font-size:max(15px,0.9vw)">
+                                        <strong style="color:var(--accent)">Left:</strong> RF (blue) and XGBoost (red)
+                                        top-20 features. Engineered features (engagement_score,
+                                        euribor_cpi_spread) rank high alongside economic indicators.
+                                    </div>
+                                </div>
+                                <div
+                                    class="card-fill"
+                                    style="
+                                        padding: 1.4vh 1.2vw;
+                                        border-left: 3px solid var(--accent);
+                                        background: rgba(0,47,167,0.04);
+                                    "
+                                >
+                                    <div class="t-body-sm" style="line-height:1.5;color:var(--text-secondary);font-size:max(15px,0.9vw)">
+                                        <strong style="color:var(--accent)">Right:</strong> SHAP waterfall explains
+                                        <em>a single prediction</em> — red pushes toward "subscribe", blue away.
+                                        Per-client interpretability is critical for stakeholder trust in production.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ====== SLIDE 11 - EVALUATION & SHAP ====== -->
+            <section
+                class="slide light"
                 data-layout="S08"
                 data-animate="grid-reveal"
-            >
+             data-notes="Beyond standard metrics, we built six novel visualizations: SHAP beeswarm for global feature attribution, SHAP waterfall for single predictions, precision-recall curves for imbalanced evaluation, lift and gains charts for business targeting, calibration curves for probability reliability, and cost-sensitive threshold tuning. The SHAP beeswarm plot on the left uses game theory to attribute each prediction to specific features. Even without duration — our leaky feature — the economic and engineered features provide strong, legitimate signal. With that, I'll hand over to [Speaker 3] for the evaluation and business impact.">
                 <div class="canvas-card">
                     <div class="chrome-min tight">
                         <div class="l">EVALUATION & INTERPRETABILITY</div>
-                        <div class="r">09 / 13</div>
+                        <div class="r">14 / 23</div>
                     </div>
                     <div
                         style="
@@ -3418,10 +3877,7 @@
                                 gap: 1vh;
                             "
                         >
-                            <div
-                                class="t-meta"
-                                style="color: rgba(255, 255, 255, 0.62)"
-                            >
+                            <div class="t-meta">
                                 SHAP + 6 NOVEL VISUALIZATIONS
                             </div>
                             <h2
@@ -3431,7 +3887,6 @@
                                     font-size: min(4.4vw, 7.6vh);
                                     line-height: 1.05;
                                     letter-spacing: -0.025em;
-                                    color: var(--paper);
                                 "
                             >
                                 What Drives
@@ -3465,24 +3920,25 @@
                                 style="
                                     display: flex;
                                     flex-direction: column;
-                                    gap: 1.6vh;
+                                    gap: 2.4vh;
+                                    justify-content: center;
                                 "
                             >
                                 <div
-                                    class="card-ink"
+                                    class="card-fill"
                                     style="
-                                        padding: 1.6vh 1.6vw;
+                                        padding: 2.2vh 1.8vw;
                                         border-left: 3px solid var(--accent);
                                     "
                                 >
                                     <div
                                         class="t-body-sm"
                                         style="
-                                            color: rgba(255, 255, 255, 0.82);
+                                            color: var(--text-secondary);
                                             line-height: 1.55;
                                         "
                                     >
-                                        <strong style="color: #fff"
+                                        <strong style="color: var(--accent)"
                                             >SHAP beeswarm</strong
                                         >
                                         — game-theoretic feature attribution on
@@ -3496,13 +3952,13 @@
                                     style="
                                         display: grid;
                                         grid-template-columns: repeat(3, 1fr);
-                                        gap: 1vw;
+                                        gap: 1.2vw;
                                     "
                                 >
                                     <div
-                                        class="card-ink"
+                                        class="card-fill"
                                         style="
-                                            padding: 1.4vh 1vw;
+                                            padding: 2vh 1.2vw;
                                             text-align: center;
                                         "
                                     >
@@ -3510,9 +3966,9 @@
                                             style="
                                                 font-family: var(--sans);
                                                 font-weight: 200;
-                                                font-size: min(3vw, 5vh);
+                                                font-size: min(3.5vw, 6vh);
                                                 line-height: 1;
-                                                color: var(--accent-bright);
+                                                color: var(--accent);
                                             "
                                         >
                                             PR
@@ -3520,18 +3976,18 @@
                                         <div
                                             class="t-body-sm"
                                             style="
-                                                color: rgba(255, 255, 255, 0.6);
-                                                font-size: 13px;
-                                                margin-top: 0.4vh;
+                                                color: var(--text-secondary);
+                                                font-size: max(14px, 0.85vw);
+                                                margin-top: 0.6vh;
                                             "
                                         >
                                             Precision-Recall Curves
                                         </div>
                                     </div>
                                     <div
-                                        class="card-ink"
+                                        class="card-fill"
                                         style="
-                                            padding: 1.4vh 1vw;
+                                            padding: 2vh 1.2vw;
                                             text-align: center;
                                         "
                                     >
@@ -3539,9 +3995,9 @@
                                             style="
                                                 font-family: var(--sans);
                                                 font-weight: 200;
-                                                font-size: min(3vw, 5vh);
+                                                font-size: min(3.5vw, 6vh);
                                                 line-height: 1;
-                                                color: var(--accent-bright);
+                                                color: var(--accent);
                                             "
                                         >
                                             Lift
@@ -3549,18 +4005,18 @@
                                         <div
                                             class="t-body-sm"
                                             style="
-                                                color: rgba(255, 255, 255, 0.6);
-                                                font-size: 13px;
-                                                margin-top: 0.4vh;
+                                                color: var(--text-secondary);
+                                                font-size: max(14px, 0.85vw);
+                                                margin-top: 0.6vh;
                                             "
                                         >
                                             Gains & Lift Analysis
                                         </div>
                                     </div>
                                     <div
-                                        class="card-ink"
+                                        class="card-fill"
                                         style="
-                                            padding: 1.4vh 1vw;
+                                            padding: 2vh 1.2vw;
                                             text-align: center;
                                         "
                                     >
@@ -3568,9 +4024,9 @@
                                             style="
                                                 font-family: var(--sans);
                                                 font-weight: 200;
-                                                font-size: min(3vw, 5vh);
+                                                font-size: min(3.5vw, 6vh);
                                                 line-height: 1;
-                                                color: var(--accent-bright);
+                                                color: var(--accent);
                                             "
                                         >
                                             Cal
@@ -3578,9 +4034,9 @@
                                         <div
                                             class="t-body-sm"
                                             style="
-                                                color: rgba(255, 255, 255, 0.6);
-                                                font-size: 13px;
-                                                margin-top: 0.4vh;
+                                                color: var(--text-secondary);
+                                                font-size: max(14px, 0.85vw);
+                                                margin-top: 0.6vh;
                                             "
                                         >
                                             Calibration Curves
@@ -3588,18 +4044,18 @@
                                     </div>
                                 </div>
                                 <div
-                                    class="card-ink"
+                                    class="card-fill"
                                     style="
-                                        padding: 1.6vh 1.6vw;
+                                        padding: 2.2vh 1.8vw;
                                         border-left: 3px solid
-                                            var(--accent-bright);
+                                            var(--accent);
                                     "
                                 >
                                     <div
                                         class="t-body-sm"
-                                        style="color: rgba(255, 255, 255, 0.78)"
+                                        style="color: var(--text-secondary);font-size:max(18px,1.05vw)"
                                     >
-                                        <strong style="color: #fff"
+                                        <strong style="color: var(--accent)"
                                             >6 novel techniques</strong
                                         >
                                         beyond standard EDA: SHAP beeswarm, SHAP
@@ -3615,16 +4071,546 @@
                 </div>
             </section>
 
-            <!-- ====== SLIDE 09 - BUSINESS IMPACT ====== -->
+            <!-- ====== SLIDE 12 - ROC & PRECISION-RECALL CURVES ====== -->
+            <section
+                class="slide light"
+                data-layout="S12"
+                data-animate="grid-reveal"
+             data-notes="Thank you, [Speaker 2]. Let me now show you how we validated these models. ROC-AUC measures ranking quality independent of threshold. XGBoost achieves AUC 0.972 in cross-validation — near-perfect class separation. But with 11.3% positive class, precision-recall curves matter more. XGBoost's PR-AUC far exceeds the baseline. ROC-AUC is imbalance-insensitive — PR curves tell the real deployment story.">
+                <div class="canvas-card">
+                    <div class="chrome-min tight">
+                        <div class="l">ROC & PR CURVES</div>
+                        <div class="r">15 / 23</div>
+                    </div>
+                    <div
+                        style="
+                            flex: 1;
+                            padding: 0;
+                            display: grid;
+                            grid-template-rows: auto 1fr;
+                            gap: 1.4vh;
+                        "
+                    >
+                        <div
+                            data-anim="head"
+                            style="display:flex;flex-direction:column;gap:0.8vh"
+                        >
+                            <div
+                                class="t-meta"
+                                style="color:var(--text-secondary)"
+                            >
+                                MODEL DISCRIMINATION & RANKING QUALITY
+                            </div>
+                            <h2
+                                style="
+                                    font-family: var(--sans), var(--sans-zh);
+                                    font-weight: 200;
+                                    font-size: min(3.8vw, 6.4vh);
+                                    line-height: 1.08;
+                                    letter-spacing: -0.025em;
+                                "
+                            >
+                                How Well Does the Model
+                                <span style="font-style:italic;font-weight:300">Separate Classes</span>
+                            </h2>
+                        </div>
+                        <div
+                            data-anim="content"
+                            style="
+                                display: grid;
+                                grid-template-columns: 1fr 1fr;
+                                gap: 1.8vw;
+                                flex: 1;
+                            "
+                        >
+                            <!-- LEFT: ROC Curves -->
+                            <div style="display:flex;flex-direction:column;gap:1vh">
+                                <figure
+                                    class="frame-img r-4x3 swiss-lined"
+                                    style="background:#fff;flex:1;min-height:20vh"
+                                >
+                                    <img
+                                        src="./figures/roc_curves.png"
+                                        alt="ROC Curves - 3 Models"
+                                        style="object-fit:contain"
+                                    />
+                                </figure>
+                                <div
+                                    class="card-fill"
+                                    style="
+                                        padding: 1.2vh 1.2vw;
+                                        border-left: 3px solid var(--accent);
+                                    "
+                                >
+                                    <div
+                                        class="t-body-sm"
+                                        style="color:var(--text-secondary);line-height:1.5"
+                                    >
+                                        <strong style="color:var(--accent)">ROC-AUC:</strong> measures ranking quality
+                                        independent of threshold. XGBoost AUC=0.972 (CV).
+                                        AUC=0.5 = random; AUC=1.0 = perfect. Best for comparing
+                                        models regardless of class imbalance.
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- RIGHT: Precision-Recall Curves -->
+                            <div style="display:flex;flex-direction:column;gap:1vh">
+                                <figure
+                                    class="frame-img r-4x3 swiss-lined"
+                                    style="background:#fff;flex:1;min-height:20vh"
+                                >
+                                    <img
+                                        src="./figures/precision_recall_curves.png"
+                                        alt="Precision-Recall Curves"
+                                        style="object-fit:contain"
+                                    />
+                                </figure>
+                                <div
+                                    class="card-fill"
+                                    style="
+                                        padding: 1.2vh 1.2vw;
+                                        border-left: 3px solid var(--accent);
+                                    "
+                                >
+                                    <div
+                                        class="t-body-sm"
+                                        style="color:var(--text-secondary);line-height:1.5"
+                                    >
+                                        <strong style="color:var(--accent)">PR Curves:</strong> <em>more informative than ROC
+                                        for imbalanced data</em> (11.3% positive). Average Precision
+                                        focuses on the minority class. Dashed line = no-skill baseline
+                                        (random classifier = positive class ratio).
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ====== SLIDE 13 - CALIBRATION & THRESHOLD TUNING ====== -->
+            <section
+                class="slide light"
+                data-layout="S13"
+                data-animate="grid-reveal"
+             data-notes="Can we trust the predicted probabilities? The calibration curve shows how well predicted probabilities match actual frequencies. A diagonal line means perfect calibration. XGBoost tends to be well-calibrated with enough trees — good news for deployment. We also performed cost-sensitive threshold tuning. The bank told us: a false negative costs 4 times more than a false positive — missing a subscriber is worse than wasting a call. Our optimal threshold is 0.31, not the default 0.50.">
+                <div class="canvas-card">
+                    <div class="chrome-min tight">
+                        <div class="l">CALIBRATION & THRESHOLD</div>
+                        <div class="r">16 / 23</div>
+                    </div>
+                    <div
+                        style="
+                            flex: 1;
+                            padding: 0;
+                            display: grid;
+                            grid-template-rows: auto 1fr;
+                            gap: 1.4vh;
+                        "
+                    >
+                        <div
+                            data-anim="head"
+                            style="display:flex;flex-direction:column;gap:0.8vh"
+                        >
+                            <div class="t-meta">PROBABILITY RELIABILITY · COST-SENSITIVE OPTIMIZATION</div>
+                            <h2
+                                style="
+                                    font-family: var(--sans), var(--sans-zh);
+                                    font-weight: 200;
+                                    font-size: min(3.8vw, 6.4vh);
+                                    line-height: 1.08;
+                                    letter-spacing: -0.025em;
+                                "
+                            >
+                                Can We Trust the
+                                <span style="font-style:italic;font-weight:300">Probabilities</span>
+                            </h2>
+                        </div>
+                        <div
+                            data-anim="content"
+                            style="
+                                display: grid;
+                                grid-template-columns: 1fr 1fr;
+                                gap: 1.8vw;
+                                flex: 1;
+                            "
+                        >
+                            <!-- LEFT: Calibration Curve -->
+                            <div style="display:flex;flex-direction:column;gap:1vh">
+                                <figure
+                                    class="frame-img r-4x3 swiss-lined"
+                                    style="background:#fff;flex:1;min-height:20vh"
+                                >
+                                    <img
+                                        src="./figures/calibration_curves.png"
+                                        alt="Calibration Curves"
+                                        style="object-fit:contain"
+                                    />
+                                </figure>
+                                <div
+                                    class="card-fill"
+                                    style="
+                                        padding: 1.2vh 1.2vw;
+                                        border-left: 3px solid var(--accent);
+                                    "
+                                >
+                                    <div class="t-body-sm" style="line-height:1.5;color:var(--text-secondary)">
+                                        <strong style="color:var(--accent)">Reliability diagram:</strong>
+                                        15-bin calibration shows how well predicted probabilities
+                                        match actual frequencies. Diagonal = perfect. XGBoost tends
+                                        to be well-calibrated with enough trees.
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- RIGHT: Threshold Tuning -->
+                            <div style="display:flex;flex-direction:column;gap:1vh">
+                                <figure
+                                    class="frame-img r-4x3 swiss-lined"
+                                    style="background:#fff;flex:1;min-height:20vh"
+                                >
+                                    <img
+                                        src="./figures/threshold_tuning.png"
+                                        alt="Threshold Tuning"
+                                        style="object-fit:contain"
+                                    />
+                                </figure>
+                                <div
+                                    class="card-fill"
+                                    style="
+                                        padding: 1.2vh 1.2vw;
+                                        border-left: 3px solid var(--accent);
+                                    "
+                                >
+                                    <div class="t-body-sm" style="line-height:1.5;color:var(--text-secondary)">
+                                        <strong style="color:var(--accent)">Cost-sensitive tuning (FN:FP = 4:1):</strong>
+                                        Missing a subscriber costs 4× more than wasted outreach.
+                                        Optimal threshold = <strong>0.31</strong> (vs default 0.50),
+                                        raising Recall from 0.407 → 0.575 at Precision = 0.501.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ====== SLIDE 17 - CONFUSION MATRIX & METRICS ====== -->
+            <section class="slide light" data-layout="S14a" data-animate="grid-reveal" data-notes="Here's the confusion matrix — the foundation of classification evaluation. We evaluate on the original imbalanced test set of 8,238 samples. This reflects real-world deployment conditions, not lab conditions. The metrics formulas show the five measures we track. Precision minimizes wasted outreach. Recall finds more subscribers. F1 balances both. ROC-AUC measures ranking quality. And accuracy — well, accuracy is deceptive. At 88.7%, it looks great but tells you nothing useful.">
+                <div class="canvas-card">
+                    <div class="chrome-min tight">
+                        <div class="l">EVALUATION METHODOLOGY</div>
+                        <div class="r">17 / 23</div>
+                    </div>
+                    <div style="flex:1;padding:0;display:grid;grid-template-rows:auto 1fr;gap:1.6vh">
+                        <div data-anim="head" style="display:flex;flex-direction:column;gap:1vh">
+                            <div class="t-meta" style="color:var(--text-secondary)">CONFUSION MATRIX · METRICS FORMULAS</div>
+                            <h2 style="font-family:var(--sans),var(--sans-zh);font-weight:200;font-size:min(4vw,6.8vh);line-height:1.08;letter-spacing:-.025em">
+                                How We <span style="font-style:italic;font-weight:300">Evaluated</span> the Models
+                            </h2>
+                        </div>
+                        <div data-anim="content" style="display:grid;grid-template-columns:1fr 1fr;gap:2vw;flex:1">
+                            <div style="display:flex;flex-direction:column;gap:1.6vh">
+                                <div class="card-fill" style="padding:1.6vh 1.6vw;border-left:3px solid var(--accent)">
+                                    <div class="t-body-sm" style="color:var(--text-secondary);line-height:1.55;font-size:max(18px,1.05vw)">
+                                        <strong style="color:var(--accent);font-size:max(20px,1.15vw)">Confusion Matrix</strong> — foundation of classification evaluation. We evaluate on the <em>original imbalanced test set</em> (8,238 samples) to reflect real-world deployment.
+                                    </div>
+                                </div>
+                                <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--grey-1);border-radius:6px;overflow:hidden;font-family:var(--mono);font-size:14px;flex:1">
+                                    <div style="padding:2vh 1.5vw;background:rgba(0,180,80,0.12);text-align:center;display:flex;flex-direction:column;justify-content:center">
+                                        <div style="color:var(--text-helper);font-size:max(13px,0.8vw)">TRUE NEGATIVE</div>
+                                        <div style="font-weight:600;color:var(--ink);font-size:max(26px,1.5vw)">TN</div>
+                                        <div style="color:var(--text-helper);font-size:max(12px,0.7vw)">Actual No &rarr; Pred No &#10003;</div>
+                                    </div>
+                                    <div style="padding:2vh 1.5vw;background:rgba(255,80,80,0.1);text-align:center;display:flex;flex-direction:column;justify-content:center">
+                                        <div style="color:var(--text-helper);font-size:max(13px,0.8vw)">FALSE POSITIVE</div>
+                                        <div style="font-weight:600;color:#d63031;font-size:max(26px,1.5vw)">FP</div>
+                                        <div style="color:var(--text-helper);font-size:max(12px,0.7vw)">Actual No &rarr; Pred Yes &#10007;</div>
+                                    </div>
+                                    <div style="padding:2vh 1.5vw;background:rgba(255,80,80,0.1);text-align:center;display:flex;flex-direction:column;justify-content:center">
+                                        <div style="color:var(--text-helper);font-size:max(13px,0.8vw)">FALSE NEGATIVE</div>
+                                        <div style="font-weight:600;color:#d63031;font-size:max(26px,1.5vw)">FN</div>
+                                        <div style="color:var(--text-helper);font-size:max(12px,0.7vw)">Actual Yes &rarr; Pred No &#10007;</div>
+                                    </div>
+                                    <div style="padding:2vh 1.5vw;background:rgba(0,180,80,0.12);text-align:center;display:flex;flex-direction:column;justify-content:center">
+                                        <div style="color:var(--text-helper);font-size:max(13px,0.8vw)">TRUE POSITIVE</div>
+                                        <div style="font-weight:600;color:var(--ink);font-size:max(26px,1.5vw)">TP</div>
+                                        <div style="color:var(--text-helper);font-size:max(12px,0.7vw)">Actual Yes &rarr; Pred Yes &#10003;</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="display:flex;flex-direction:column;gap:1.6vh">
+                                <div class="card-fill" style="padding:1.6vh 1.6vw;border-left:3px solid var(--accent)">
+                                    <div class="t-meta" style="color:var(--text-helper);font-size:max(13px,0.8vw);margin-bottom:1vh">METRICS FORMULAS</div>
+                                    <pre style="font-family:var(--mono);font-size:max(14px,0.85vw);line-height:1.9;color:var(--text-secondary);background:var(--grey-1);padding:1.6vh 1.6vw;border-radius:4px;white-space:pre-wrap">Precision = TP / (TP + FP)     <span style="color:var(--text-helper)">&rarr; minimize wasted outreach</span>
+Recall    = TP / (TP + FN)     <span style="color:var(--text-helper)">&rarr; find more subscribers</span>
+F1        = 2&middot;P&middot;R / (P + R)    <span style="color:var(--text-helper)">&rarr; harmonic mean of P &amp; R</span>
+ROC-AUC   = area under ROC     <span style="color:var(--text-helper)">&rarr; ranking quality</span>
+Accuracy  = (TP+TN) / Total    <span style="color:var(--text-helper)">&rarr; DECEPTIVE for imbalanced data!</span></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ====== SLIDE 18 - CROSS-VALIDATION & RESULTS ====== -->
+            <section class="slide light" data-layout="S14b" data-animate="grid-reveal" data-notes="We used 5-fold stratified cross-validation — each fold preserves the SMOTE-balanced class ratio. Models are evaluated on held-out folds, not training data. Final metrics are the mean across all five folds. Our key CV results: F1 0.929, precision 0.561 on the real test set, AUC 0.972. For reference, if we include duration — the leaky feature — AUC jumps to 0.952. That gap of 0.15 quantifies the cost of being honest.">
+                <div class="canvas-card">
+                    <div class="chrome-min tight">
+                        <div class="l">EVALUATION METHODOLOGY</div>
+                        <div class="r">18 / 23</div>
+                    </div>
+                    <div style="flex:1;padding:0;display:grid;grid-template-rows:auto 1fr;gap:1.6vh">
+                        <div data-anim="head" style="display:flex;flex-direction:column;gap:1vh">
+                            <div class="t-meta" style="color:var(--text-secondary)">CROSS-VALIDATION &middot; CONFUSION MATRICES &middot; RESULTS</div>
+                            <h2 style="font-family:var(--sans),var(--sans-zh);font-weight:200;font-size:min(4vw,6.8vh);line-height:1.08;letter-spacing:-.025em">
+                                Validating <span style="font-style:italic;font-weight:300">the Models</span>
+                            </h2>
+                        </div>
+                        <div data-anim="content" style="display:grid;grid-template-columns:5fr 7fr;gap:2vw;flex:1">
+                            <div style="display:flex;flex-direction:column;gap:1.6vh">
+                                <div class="card-fill" style="padding:1.6vh 1.6vw;border-left:3px solid var(--accent)">
+                                    <div class="t-body-sm" style="color:var(--text-secondary);line-height:1.55;font-size:max(18px,1.05vw)">
+                                        <strong style="color:var(--accent);font-size:max(20px,1.15vw)">5-Fold Stratified CV</strong> — each fold preserves SMOTE-balanced class ratio. Models evaluated on <em>held-out fold</em>, not training data. Final metrics = mean across 5 folds.
+                                    </div>
+                                </div>
+                                <pre style="font-family:var(--mono);font-size:max(14px,0.85vw);line-height:1.5;color:var(--text-secondary);background:var(--grey-1);padding:1.6vh 1.6vw;border-radius:4px;white-space:pre-wrap;word-break:break-all">
+<span style="color:var(--text-helper)"># SMOTE-balanced 5-fold CV</span>
+cv = StratifiedKFold(n_splits=5, shuffle=True)
+scores = cross_validate(
+    model, X_train_smote, y_train_smote,
+    cv=cv, scoring=['roc_auc','f1','precision','recall'],
+    n_jobs=-1
+)
+<span style="color:var(--text-helper)"># &rarr; mean metrics across folds</span></pre>
+                                <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0.8vw">
+                                    <div class="card-fill" style="padding:1.8vh 1vw;text-align:center;border-top:2px solid var(--accent)">
+                                        <div style="font-family:var(--sans);font-weight:200;font-size:min(2.8vw,5vh);line-height:1;color:var(--accent)">0.929</div>
+                                        <div class="t-body-sm" style="color:var(--text-secondary);font-size:max(13px,0.8vw);margin-top:0.5vh">XGB CV F1</div>
+                                    </div>
+                                    <div class="card-fill" style="padding:1.8vh 1vw;text-align:center;border-top:2px solid var(--accent)">
+                                        <div style="font-family:var(--sans);font-weight:200;font-size:min(2.8vw,5vh);line-height:1;color:var(--accent)">0.561</div>
+                                        <div class="t-body-sm" style="color:var(--text-secondary);font-size:max(13px,0.8vw);margin-top:0.5vh">XGB Test Prec</div>
+                                    </div>
+                                    <div class="card-fill" style="padding:1.8vh 1vw;text-align:center;border-top:2px solid var(--accent)">
+                                        <div style="font-family:var(--sans);font-weight:200;font-size:min(2.8vw,5vh);line-height:1;color:var(--accent)">0.972</div>
+                                        <div class="t-body-sm" style="color:var(--text-secondary);font-size:max(13px,0.8vw);margin-top:0.5vh">XGB CV AUC</div>
+                                    </div>
+                                    <div class="card-fill" style="padding:1.8vh 1vw;text-align:center;border-top:2px solid var(--accent)">
+                                        <div style="font-family:var(--sans);font-weight:200;font-size:min(2.8vw,5vh);line-height:1;color:var(--accent)">0.952</div>
+                                        <div class="t-body-sm" style="color:var(--text-secondary);font-size:max(13px,0.8vw);margin-top:0.5vh">AUC w/ Duration</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <figure class="frame-img r-4x3 swiss-lined" style="background:#fff;flex:1;min-height:24vh">
+                                <img src="./figures/confusion_matrices.png" alt="Confusion Matrices" style="object-fit:contain" />
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </section>
+<!-- ====== SLIDE 15 - DURATION LEAKAGE ANALYSIS ====== -->
+            <section
+                class="slide light"
+                data-layout="S15"
+                data-animate="grid-reveal"
+             data-notes="Let me address the elephant in the room: duration. Duration is the strongest predictor in the dataset — AUC 0.952. But it's post-hoc. You only know call length after the call ends. Including it means the model knows the outcome before making the prediction — textbook data leakage. We made the hard but correct choice: remove it. Our production model drops from AUC 0.95 to 0.80. But that 0.80 is real. It works on new customers the bank has never called before. That's the difference between a lab result and a deployable system.">
+                <div class="canvas-card">
+                    <div class="chrome-min tight">
+                        <div class="l">DATA LEAKAGE WARNING</div>
+                        <div class="r">19 / 23</div>
+                    </div>
+                    <div
+                        style="
+                            flex: 1;
+                            padding: 0;
+                            display: grid;
+                            grid-template-rows: auto 1fr;
+                            gap: 1.4vh;
+                        "
+                    >
+                        <div
+                            data-anim="head"
+                            style="display:flex;flex-direction:column;gap:0.8vh"
+                        >
+                            <div
+                                class="t-meta"
+                                style="color:var(--text-secondary)"
+                            >
+                                WHY WE EXCLUDED THE STRONGEST PREDICTOR
+                            </div>
+                            <h2
+                                style="
+                                    font-family: var(--sans), var(--sans-zh);
+                                    font-weight: 200;
+                                    font-size: min(3.8vw, 6.4vh);
+                                    line-height: 1.08;
+                                    letter-spacing: -0.025em;
+                                "
+                            >
+                                The
+                                <span style="font-style:italic;font-weight:300">Duration</span>
+                                Trap
+                            </h2>
+                        </div>
+                        <div
+                            data-anim="content"
+                            style="
+                                display: grid;
+                                grid-template-columns: 1fr 1fr;
+                                gap: 2vw;
+                                flex: 1;
+                            "
+                        >
+                            <!-- LEFT: Duration Analysis Figure -->
+                            <figure
+                                class="frame-img r-4x3 swiss-lined"
+                                style="background:#fff;flex:1;min-height:24vh"
+                            >
+                                <img
+                                    src="./figures/duration_analysis.png"
+                                    alt="Duration Analysis - Data Leakage"
+                                    style="object-fit:contain"
+                                />
+                            </figure>
+                            <!-- RIGHT: Explanation -->
+                            <div style="display:flex;flex-direction:column;gap:1.6vh">
+                                <div
+                                    class="card-fill"
+                                    style="
+                                        padding: 1.6vh 1.4vw;
+                                        border-left: 3px solid #ff6b6b;
+                                    "
+                                >
+                                    <div
+                                        class="t-body-sm"
+                                        style="color:var(--text-secondary);line-height:1.6;font-size:max(17px,1vw)"
+                                    >
+                                        <strong style="color:#d63031;font-size:max(19px,1.15vw)">⚠ Duration is a post-hoc feature</strong><br/>
+                                        You only know the call length <em>after</em> the call ends.
+                                        Including it means predicting the past — the model knows the
+                                        outcome before making the prediction. This is the textbook
+                                        definition of <strong>data leakage</strong>.
+                                    </div>
+                                </div>
+                                <div
+                                    style="
+                                        display: grid;
+                                        grid-template-columns: 1fr 1fr;
+                                        gap: 1vw;
+                                    "
+                                >
+                                    <div
+                                        class="card-fill"
+                                        style="
+                                            padding: 2vh 1.4vw;
+                                            text-align: center;
+                                            border-top: 3px solid #d63031;
+                                        "
+                                    >
+                                        <div
+                                            style="
+                                                font-family: var(--sans);
+                                                font-weight: 200;
+                                                font-size: min(3.5vw, 6vh);
+                                                line-height: 1;
+                                                color: #d63031;
+                                            "
+                                        >
+                                            0.952
+                                        </div>
+                                        <div
+                                            class="t-body-sm"
+                                            style="
+                                                color: var(--text-secondary);
+                                                font-size: max(14px, 0.85vw);
+                                                margin-top: 0.6vh;
+                                            "
+                                        >
+                                            AUC WITH duration
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="card-fill"
+                                        style="
+                                            padding: 2vh 1.4vw;
+                                            text-align: center;
+                                            border-top: 3px solid var(--accent);
+                                        "
+                                    >
+                                        <div
+                                            style="
+                                                font-family: var(--sans);
+                                                font-weight: 200;
+                                                font-size: min(3.5vw, 6vh);
+                                                line-height: 1;
+                                                color: var(--accent);
+                                            "
+                                        >
+                                            0.798
+                                        </div>
+                                        <div
+                                            class="t-body-sm"
+                                            style="
+                                                color: var(--text-secondary);
+                                                font-size: max(14px, 0.85vw);
+                                                margin-top: 0.6vh;
+                                            "
+                                        >
+                                            AUC WITHOUT duration
+                                        </div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="card-fill"
+                                    style="
+                                        padding: 1.4vh 1.4vw;
+                                        border-left: 3px solid var(--accent);
+                                    "
+                                >
+                                    <div
+                                        class="t-body-sm"
+                                        style="color:var(--text-secondary);line-height:1.55"
+                                    >
+                                        <strong style="color:var(--accent)">The gap 0.952 → 0.798 (−0.154 AUC)</strong>
+                                        quantifies the <em>cost of realism</em>. The duration-inclusive
+                                        model is a theoretical upper bound — useful as a sanity check
+                                        that our pipeline works, but <strong>never deployable</strong>.
+                                        Our production XGBoost achieves 0.798 AUC without any leakage.
+                                    </div>
+                                </div>
+                                <!-- Code snippet showing exclusion -->
+                                <pre
+                                    style="
+                                        font-family: var(--mono);
+                                        font-size: 10px;
+                                        line-height: 1.5;
+                                        color: var(--text-helper);
+                                        background: rgba(255,255,255,0.05);
+                                        padding: 0.8vh 0.8vw;
+                                        border-radius: 4px;
+                                        white-space: pre-wrap;
+                                    "
+># Production features — duration EXCLUDED
+production_num_cols = ['age','campaign','pdays','previous'] + econ_cols
+# Reference only — duration INCLUDED (DO NOT DEPLOY)
+full_num_cols = production_num_cols + ['duration']</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ====== SLIDE 16 - BUSINESS IMPACT ====== -->
             <section
                 class="slide light"
                 data-layout="S09"
                 data-animate="bar-grow"
-            >
+             data-notes="What does this mean for the bank? With XGBoost at our cost-tuned threshold of 0.31, we achieve 56.1% precision — meaning more than half of targeted customers actually subscribe. That's 5 times better than randomly calling 11.3% of the database. The lift chart on the right shows how much better our model performs compared to random targeting. In the top 20% of predicted probabilities, we capture a disproportionate share of actual subscribers.">
                 <div class="canvas-card">
                     <div class="chrome-min tight">
                         <div class="l">BUSINESS IMPACT</div>
-                        <div class="r">10 / 13</div>
+                        <div class="r">20 / 23</div>
                     </div>
                     <div
                         style="
@@ -3756,16 +4742,16 @@
                 </div>
             </section>
 
-            <!-- ====== SLIDE 10 - CHALLENGES & LESSONS ====== -->
+            <!-- ====== SLIDE 13 - CHALLENGES & LESSONS ====== -->
             <section
-                class="slide dark"
+                class="slide light"
                 data-layout="S10"
                 data-animate="three-forces"
-            >
+             data-notes="Our biggest challenge was the core lesson of this project: the best model deploys — it's not the one with the highest AUC. We faced severe class imbalance, data leakage, multicollinearity, domain shift risk from the financial crisis period, and 'unknown' values in 6 categorical columns. Our solutions: SMOTE for imbalance, removing duration for leakage, choosing tree-based models for multicollinearity, documenting domain shift as a limitation, and treating 'unknown' as a meaningful category — not missing data.">
                 <div class="canvas-card">
                     <div class="chrome-min tight">
                         <div class="l">CHALLENGES & LESSONS</div>
-                        <div class="r">11 / 13</div>
+                        <div class="r">21 / 23</div>
                     </div>
                     <div
                         style="
@@ -3786,7 +4772,7 @@
                         >
                             <div
                                 class="t-meta"
-                                style="color: rgba(255, 255, 255, 0.62)"
+                                style="color: var(--text-secondary)"
                             >
                                 WHAT WE LEARNED
                             </div>
@@ -3797,7 +4783,6 @@
                                     font-size: min(4.4vw, 7.6vh);
                                     line-height: 1.05;
                                     letter-spacing: -0.025em;
-                                    color: var(--paper);
                                 "
                             >
                                 Challenges
@@ -3819,7 +4804,7 @@
                             "
                         >
                             <div
-                                class="card-ink"
+                                class="card-fill"
                                 style="
                                     padding: 2.2vh 2vw;
                                     display: flex;
@@ -3830,7 +4815,7 @@
                             >
                                 <div
                                     class="t-meta"
-                                    style="color: rgba(255, 255, 255, 0.55)"
+                                    style="color: var(--text-helper)"
                                 >
                                     CORE LESSON
                                 </div>
@@ -3842,7 +4827,7 @@
                                         font-size: min(3.2vw, 6vh);
                                         line-height: 1.1;
                                         letter-spacing: -0.02em;
-                                        color: var(--paper);
+                                        color: var(--ink);
                                     "
                                 >
                                     The best model
@@ -3857,7 +4842,7 @@
                                 </div>
                                 <div
                                     class="t-body-sm"
-                                    style="color: rgba(255, 255, 255, 0.72)"
+                                    style="color: var(--text-secondary)"
                                 >
                                     Removing duration drops AUC from 0.95 to
                                     0.80 — but makes the model
@@ -3874,7 +4859,7 @@
                                 <div
                                     class="card-fill"
                                     style="
-                                        padding: 1.1vh 1.2vw;
+                                        padding: 1.8vh 1.6vw;
                                         border-left: 3px solid var(--accent);
                                         color: var(--text-primary);
                                     "
@@ -3883,7 +4868,7 @@
                                         style="
                                             font-family: var(--sans);
                                             font-weight: 200;
-                                            font-size: min(2vw, 3.4vh);
+                                            font-size: min(2.8vw, 5vh);
                                             line-height: 1;
                                             color: var(--accent);
                                         "
@@ -3914,7 +4899,7 @@
                                 <div
                                     class="card-fill"
                                     style="
-                                        padding: 1.1vh 1.2vw;
+                                        padding: 1.8vh 1.6vw;
                                         border-left: 3px solid var(--accent);
                                         color: var(--text-primary);
                                     "
@@ -3923,7 +4908,7 @@
                                         style="
                                             font-family: var(--sans);
                                             font-weight: 200;
-                                            font-size: min(2vw, 3.4vh);
+                                            font-size: min(2.8vw, 5vh);
                                             line-height: 1;
                                             color: var(--accent);
                                         "
@@ -3954,7 +4939,7 @@
                                 <div
                                     class="card-fill"
                                     style="
-                                        padding: 1.1vh 1.2vw;
+                                        padding: 1.8vh 1.6vw;
                                         border-left: 3px solid var(--accent);
                                         color: var(--text-primary);
                                     "
@@ -3963,7 +4948,7 @@
                                         style="
                                             font-family: var(--sans);
                                             font-weight: 200;
-                                            font-size: min(2vw, 3.4vh);
+                                            font-size: min(2.8vw, 5vh);
                                             line-height: 1;
                                             color: var(--accent);
                                         "
@@ -3994,7 +4979,7 @@
                                 <div
                                     class="card-fill"
                                     style="
-                                        padding: 1.1vh 1.2vw;
+                                        padding: 1.8vh 1.6vw;
                                         border-left: 3px solid var(--accent);
                                         color: var(--text-primary);
                                     "
@@ -4003,7 +4988,7 @@
                                         style="
                                             font-family: var(--sans);
                                             font-weight: 200;
-                                            font-size: min(2vw, 3.4vh);
+                                            font-size: min(2.8vw, 5vh);
                                             line-height: 1;
                                             color: var(--accent);
                                         "
@@ -4037,16 +5022,16 @@
                 </div>
             </section>
 
-            <!-- ====== SLIDE 11 - BUSINESS RECOMMENDATIONS ====== -->
+            <!-- ====== SLIDE 14 - BUSINESS RECOMMENDATIONS ====== -->
             <section
                 class="slide light"
                 data-layout="S11"
                 data-animate="grid-reveal"
-            >
+             data-notes="Eight actionable recommendations for the bank. First, targeting: prioritize customers with previous campaign success — poutcome is consistently the top predictor. Second, channel: prefer cellular over landline — it consistently outperforms. Third, timing: use economic indicators to time campaigns — when Euribor is low, term deposits may be less attractive, so adjust messaging. Fourth, threshold: use our cost-tuned threshold of 0.31 rather than the default 0.50. Fifth: monitor for domain shift as economic conditions change — our 2008–2010 data may not reflect 2026.">
                 <div class="canvas-card">
                     <div class="chrome-min tight">
                         <div class="l">BUSINESS RECOMMENDATIONS</div>
-                        <div class="r">12 / 13</div>
+                        <div class="r">22 / 23</div>
                     </div>
                     <div
                         style="
@@ -4096,7 +5081,7 @@
                             <div
                                 class="card-fill"
                                 style="
-                                    padding: 1.6vh 1.2vw;
+                                    padding: 2.2vh 1.6vw;
                                     display: flex;
                                     flex-direction: column;
                                     gap: 1vh;
@@ -4116,7 +5101,7 @@
                             <div
                                 class="card-fill"
                                 style="
-                                    padding: 1.6vh 1.2vw;
+                                    padding: 2.2vh 1.6vw;
                                     display: flex;
                                     flex-direction: column;
                                     gap: 1vh;
@@ -4136,7 +5121,7 @@
                             <div
                                 class="card-fill"
                                 style="
-                                    padding: 1.6vh 1.2vw;
+                                    padding: 2.2vh 1.6vw;
                                     display: flex;
                                     flex-direction: column;
                                     gap: 1vh;
@@ -4156,7 +5141,7 @@
                             <div
                                 class="card-fill"
                                 style="
-                                    padding: 1.6vh 1.2vw;
+                                    padding: 2.2vh 1.6vw;
                                     display: flex;
                                     flex-direction: column;
                                     gap: 1vh;
@@ -4178,7 +5163,7 @@
                             <div
                                 class="card-fill"
                                 style="
-                                    padding: 1.6vh 1.2vw;
+                                    padding: 2.2vh 1.6vw;
                                     display: flex;
                                     flex-direction: column;
                                     gap: 1vh;
@@ -4198,7 +5183,7 @@
                             <div
                                 class="card-fill"
                                 style="
-                                    padding: 1.6vh 1.2vw;
+                                    padding: 2.2vh 1.6vw;
                                     display: flex;
                                     flex-direction: column;
                                     gap: 1vh;
@@ -4218,7 +5203,7 @@
                             <div
                                 class="card-fill"
                                 style="
-                                    padding: 1.6vh 1.2vw;
+                                    padding: 2.2vh 1.6vw;
                                     display: flex;
                                     flex-direction: column;
                                     gap: 1vh;
@@ -4238,7 +5223,7 @@
                             <div
                                 class="card-accent"
                                 style="
-                                    padding: 1.6vh 1.2vw;
+                                    padding: 2.2vh 1.6vw;
                                     display: flex;
                                     flex-direction: column;
                                     gap: 1vh;
@@ -4273,12 +5258,12 @@
                 </div>
             </section>
 
-            <!-- ====== SLIDE 12 - CONCLUSION + BONUS ====== -->
+            <!-- ====== SLIDE 15 - CONCLUSION + BONUS ====== -->
             <section
                 class="slide split"
                 data-layout="S12"
                 data-animate="split-statement"
-            >
+             data-notes="To conclude: Predict. Target. Optimize. XGBoost delivers 56.1% precision — 5 times above baseline — using only legitimate, pre-call features. We removed duration despite its predictive power because production integrity matters more than a higher number on a slide. The key contributions: 5 economic indicators from Banco de Portugal, 4 engineered features, cost-sensitive threshold tuning at 4:1 FN-to-FP ratio, and a production-viable model that a bank can actually deploy. Thank you. We're happy to take your questions.">
                 <div class="canvas-card">
                     <div class="split-half">
                         <div
@@ -4300,9 +5285,10 @@
                                     margin-bottom: 0;
                                     position: relative;
                                     z-index: 1;
+                                    color: rgba(255,255,255,0.78);
                                 "
                             >
-                                <div class="l">13 / 13</div>
+                                <div class="l">23 / 23</div>
                                 <div class="r">CONCLUSION</div>
                             </div>
                             <div
@@ -4350,7 +5336,7 @@
                                             var(--sans), var(--sans-zh);
                                         font-size: max(14px, 1vw);
                                         line-height: 1.6;
-                                        color: rgba(255, 255, 255, 0.82);
+                                        color: rgba(255,255,255,0.85);
                                         font-weight: 400;
                                         max-width: 36ch;
                                         margin-top: 1.4vh;
@@ -4377,13 +5363,13 @@
                             >
                                 <div
                                     class="t-meta"
-                                    style="color: rgba(255, 255, 255, 0.62)"
+                                    style="color: rgba(255,255,255,0.6)"
                                 >
                                     Data Analytics - Topic 4 - 2026
                                 </div>
                                 <div
                                     class="t-meta"
-                                    style="color: rgba(255, 255, 255, 0.62)"
+                                    style="color: rgba(255,255,255,0.6)"
                                 >
                                     → END
                                 </div>
@@ -5520,5 +6506,239 @@ void main(){
                 start();
             })();
         </script>
-    </body>
+    
+<div id="presenter-overlay">
+  <div id="presenter-backdrop"></div>
+  <div id="presenter-panel">
+    <button class="pnl-close-btn" id="pnl-close" title="Close (N)">&times;</button>
+    <div class="pnl-badge" id="pnl-badge">SPEAKER NOTES</div>
+    <div class="pnl-badge" id="pnl-counter" style="margin-bottom:2px">Slide — / —</div>
+    <div class="pnl-label" id="pnl-label"></div>
+    <div class="pnl-divider"></div>
+    <div class="pnl-notes" id="pnl-notes"></div>
+    <div class="pnl-timer-row">
+      <div class="pnl-timer" id="pnl-timer">00:00</div>
+      <div class="pnl-badge" style="color:#555">N to close / reopen</div>
+    </div>
+    <div class="pnl-next-block">
+      <div class="pnl-next-label">Next Slide</div>
+      <div class="pnl-next-title" id="pnl-next-title"></div>
+    </div>
+    <div class="pnl-hint">Bank Marketing &middot; Speaker Notes</div>
+  </div>
+</div>
+<script>
+(function() {
+  var panelActive = false;
+  var popupOpen = false;
+  var notesWin = null;
+  var channel = null;
+  var startTime = Date.now();
+
+  // BroadcastChannel for popup sync
+  try { channel = new BroadcastChannel('bank-marketing-presenter'); } catch(e) {}
+
+  function getSlideInfo() {
+    var sections = document.querySelectorAll('section.slide');
+    var idx = window.__currentSlideIndex || 0;
+    if (idx < 0) idx = 0;
+    if (idx >= sections.length) idx = sections.length - 1;
+
+    var s = sections[idx];
+    var notes = s ? (s.getAttribute('data-notes') || '') : '';
+    var chromeEl = s ? s.querySelector('.chrome-min, .chrome') : null;
+    var labelText = chromeEl ? chromeEl.textContent.trim() : ('Slide ' + (idx + 1));
+
+    var nextTitle = '';
+    if (idx + 1 < sections.length) {
+      var nc = sections[idx + 1].querySelector('.chrome-min, .chrome');
+      nextTitle = nc ? nc.textContent.trim() : ('Slide ' + (idx + 2));
+    }
+
+    return { index: idx, total: sections.length, label: labelText, notes: notes, nextTitle: nextTitle };
+  }
+
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+  function fmtTime() {
+    var e = Math.floor((Date.now() - startTime) / 1000);
+    return pad(Math.floor(e / 60)) + ':' + pad(e % 60);
+  }
+
+  function broadcast(info) {
+    if (channel) {
+      try { channel.postMessage({ type: 'slide-update', info: info }); } catch(e) {}
+    }
+  }
+
+  // ── In-page panel ────────────────────────────────────────
+  function updatePanel() {
+    var info = getSlideInfo();
+    document.getElementById('pnl-counter').textContent = 'Slide ' + (info.index + 1) + ' / ' + info.total;
+    document.getElementById('pnl-label').textContent = info.label;
+    if (info.notes) {
+      document.getElementById('pnl-notes').textContent = info.notes;
+      document.getElementById('pnl-notes').className = 'pnl-notes';
+    } else {
+      document.getElementById('pnl-notes').textContent = '(No speaker notes for this slide)';
+      document.getElementById('pnl-notes').className = 'pnl-notes empty';
+    }
+    document.getElementById('pnl-timer').textContent = fmtTime();
+    document.getElementById('pnl-next-title').textContent = info.nextTitle || '— End —';
+  }
+
+  function togglePanel() {
+    panelActive = !panelActive;
+    if (panelActive) {
+      document.getElementById('presenter-overlay').classList.add('active');
+      startTime = Date.now();
+      updatePanel();
+    } else {
+      document.getElementById('presenter-overlay').classList.remove('active');
+    }
+  }
+
+  // ── Popup window (dual-monitor presenter mode) ────────────
+  function openPopup() {
+    if (notesWin && !notesWin.closed) { notesWin.focus(); broadcast(getSlideInfo()); return true; }
+
+    var w = 640, h = 900;
+    var sl = window.screenLeft || window.screenX || 0;
+    var st = window.screenTop || window.screenY || 0;
+    var ow = window.outerWidth || window.innerWidth || 1200;
+    var left = sl + ow - w - 40;
+    var top = st + 60;
+    if (left < 0) left = 100;
+    if (top < 0) top = 60;
+
+    notesWin = window.open('', 'speaker-notes-win',
+      'width=' + w + ',height=' + h + ',left=' + left + ',top=' + top +
+      ',menubar=no,toolbar=no,location=no,status=no,resizable=yes,scrollbars=yes');
+
+    if (!notesWin) return false;
+
+    popupOpen = true;
+
+    notesWin.document.write(
+      '<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><title>Speaker Notes — Bank Marketing</title>' +
+      '<style>' +
+      '*{margin:0;padding:0;box-sizing:border-box}' +
+      'body{font-family:system-ui,-apple-system,"PingFang SC",sans-serif;background:#1a1a1a;color:#e0e0e0;padding:36px 32px;min-height:100vh}' +
+      '.badge{font-family:"JetBrains Mono","SF Mono",monospace;font-size:22px;letter-spacing:.12em;color:#888;text-transform:uppercase}' +
+      '.label{font-size:38px;font-weight:600;color:#fff;margin-bottom:4px;line-height:1.25}' +
+      '.divider{height:1px;background:rgba(255,255,255,.15);margin:22px 0}' +
+      '.txt{font-size:32px;line-height:1.55;color:#ccc;white-space:pre-wrap}' +
+      '.txt.empty{color:#555;font-style:italic}' +
+      '.timer-row{margin-top:24px;padding:16px 0;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between}' +
+      '.timer{font-family:"JetBrains Mono","SF Mono",monospace;font-size:40px;color:#aaa}' +
+      '.next-block{margin-top:28px;padding:20px;background:rgba(255,255,255,.05);border-radius:6px}' +
+      '.next-label{font-size:18px;text-transform:uppercase;letter-spacing:.15em;color:#666;margin-bottom:8px}' +
+      '.next-title{font-size:26px;color:#999}' +
+      '.hint{position:fixed;bottom:18px;right:22px;font-size:16px;color:#444;font-family:monospace}' +
+      '.dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#4CAF50;margin-right:6px}' +
+      '</style></head><body>' +
+      '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">' +
+      '<div class="badge"><span class="dot"></span>SPEAKER NOTES</div>' +
+      '<div class="badge" id="counter"></div></div>' +
+      '<div class="label" id="label"></div>' +
+      '<div class="divider"></div>' +
+      '<div class="txt" id="notes"></div>' +
+      '<div class="timer-row"><div class="timer" id="timer">00:00</div><div class="badge" style="color:#666">N to refocus</div></div>' +
+      '<div class="next-block"><div class="next-label">Next Slide</div><div class="next-title" id="nextTitle"></div></div>' +
+      '<div class="hint">Bank Marketing · Speaker Notes · Close to exit</div>' +
+      '</body></html>'
+    );
+
+    var s = notesWin.document.createElement('script');
+    s.textContent = '(' + function() {
+      var ch2 = new BroadcastChannel('bank-marketing-presenter');
+      var t0 = Date.now();
+      function p(n) { return n < 10 ? '0' + n : '' + n; }
+      function ft() { var e = Math.floor((Date.now() - t0)/1000); return p(Math.floor(e/60)) + ':' + p(e%60); }
+      ch2.onmessage = function(ev) {
+        if (ev.data && ev.data.type === 'slide-update') {
+          var d = ev.data.info;
+          document.getElementById('counter').textContent = 'Slide ' + (d.index+1) + ' / ' + d.total;
+          document.getElementById('label').textContent = d.label;
+          document.getElementById('notes').textContent = d.notes || '(No speaker notes for this slide)';
+          if (!d.notes) document.getElementById('notes').className = 'txt empty';
+          else document.getElementById('notes').className = 'txt';
+          document.getElementById('nextTitle').textContent = d.nextTitle || '— End —';
+          document.getElementById('timer').textContent = ft();
+        }
+      };
+      setInterval(function() { document.getElementById('timer').textContent = ft(); }, 1000);
+    }.toString() + ')();';
+    notesWin.document.body.appendChild(s);
+
+    // Detect popup close
+    var checkClosed = setInterval(function() {
+      if (notesWin && notesWin.closed) {
+        popupOpen = false;
+        notesWin = null;
+        clearInterval(checkClosed);
+      }
+    }, 500);
+
+    setTimeout(function() { broadcast(getSlideInfo()); }, 400);
+    return true;
+  }
+
+  // ── N key: popup-first, panel-fallback ─────────────────────
+  document.addEventListener('keydown', function(e) {
+    if ((e.key === 'n' || e.key === 'N') && !e.metaKey && !e.ctrlKey && !e.altKey) {
+      e.preventDefault();
+
+      // If popup already open, focus + resync
+      if (popupOpen && notesWin && !notesWin.closed) {
+        notesWin.focus();
+        broadcast(getSlideInfo());
+        return;
+      }
+
+      // Try popup first
+      var ok = openPopup();
+      if (ok) {
+        if (panelActive) {
+          panelActive = false;
+          document.getElementById('presenter-overlay').classList.remove('active');
+        }
+      } else {
+        // Popup blocked -> in-page panel fallback
+        togglePanel();
+      }
+    }
+  });
+
+  // Panel close handlers
+  document.getElementById('pnl-close').addEventListener('click', function() {
+    panelActive = false;
+    document.getElementById('presenter-overlay').classList.remove('active');
+  });
+  document.getElementById('presenter-backdrop').addEventListener('click', function() {
+    panelActive = false;
+    document.getElementById('presenter-overlay').classList.remove('active');
+  });
+
+  // Poll slide changes
+  var lastIndex = -1;
+  function poll() {
+    var idx = window.__currentSlideIndex || 0;
+    if (idx !== lastIndex) {
+      lastIndex = idx;
+      if (panelActive) updatePanel();
+      if (popupOpen && notesWin && !notesWin.closed) broadcast(getSlideInfo());
+    }
+    requestAnimationFrame(poll);
+  }
+  requestAnimationFrame(poll);
+
+  // Timer tick
+  setInterval(function() {
+    if (panelActive) document.getElementById('pnl-timer').textContent = fmtTime();
+  }, 1000);
+
+  console.log('[Presenter Mode] N = speaker notes popup (panel fallback if blocked).');
+})();
+</script>
+</body>
 </html>
